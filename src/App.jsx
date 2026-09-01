@@ -20,6 +20,7 @@ import ObfuscationSim from './components/simulations/ObfuscationSim';
 import HashingSignaturesSim from './components/simulations/HashingSignaturesSim';
 import SecurityControlsMcq from './components/questions/SecurityControlsMcq';
 import CiaTriadMcq from './components/questions/CiaTriadMcq';
+import NonRepudiationMcq from './components/questions/NonRepudiationMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -156,6 +157,7 @@ export default function App() {
               if (topicId === 'hashing_signatures') setCurrentView('hashing_signatures');
               if (topicId === 'security_controls_mcq') setCurrentView('security_controls_mcq');
               if (topicId === 'cia_triad_mcq') setCurrentView('cia_triad_mcq');
+              if (topicId === 'non_repudiation_mcq') setCurrentView('non_repudiation_mcq');
             }}
           />
         )}
@@ -666,6 +668,12 @@ export default function App() {
 
         {currentView === 'cia_triad_mcq' && (
           <CiaTriadMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'non_repudiation_mcq' && (
+          <NonRepudiationMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
