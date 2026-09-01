@@ -25,6 +25,7 @@ import AaaFrameworkMcq from './components/questions/AaaFrameworkMcq';
 import GapAnalysisMcq from './components/questions/GapAnalysisMcq';
 import ZeroTrustMcq from './components/questions/ZeroTrustMcq';
 import PhysicalSecurityMcq from './components/questions/PhysicalSecurityMcq';
+import DeceptionDisruptionMcq from './components/questions/DeceptionDisruptionMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -166,6 +167,7 @@ export default function App() {
               if (topicId === 'gap_analysis_mcq') setCurrentView('gap_analysis_mcq');
               if (topicId === 'zero_trust_mcq') setCurrentView('zero_trust_mcq');
               if (topicId === 'physical_security_mcq') setCurrentView('physical_security_mcq');
+              if (topicId === 'deception_disruption_mcq') setCurrentView('deception_disruption_mcq');
             }}
           />
         )}
@@ -706,6 +708,12 @@ export default function App() {
 
         {currentView === 'physical_security_mcq' && (
           <PhysicalSecurityMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'deception_disruption_mcq' && (
+          <DeceptionDisruptionMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
