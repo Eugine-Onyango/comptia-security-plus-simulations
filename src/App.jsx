@@ -23,6 +23,7 @@ import CiaTriadMcq from './components/questions/CiaTriadMcq';
 import NonRepudiationMcq from './components/questions/NonRepudiationMcq';
 import AaaFrameworkMcq from './components/questions/AaaFrameworkMcq';
 import GapAnalysisMcq from './components/questions/GapAnalysisMcq';
+import ZeroTrustMcq from './components/questions/ZeroTrustMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -162,6 +163,7 @@ export default function App() {
               if (topicId === 'non_repudiation_mcq') setCurrentView('non_repudiation_mcq');
               if (topicId === 'aaa_framework_mcq') setCurrentView('aaa_framework_mcq');
               if (topicId === 'gap_analysis_mcq') setCurrentView('gap_analysis_mcq');
+              if (topicId === 'zero_trust_mcq') setCurrentView('zero_trust_mcq');
             }}
           />
         )}
@@ -690,6 +692,12 @@ export default function App() {
 
         {currentView === 'gap_analysis_mcq' && (
           <GapAnalysisMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'zero_trust_mcq' && (
+          <ZeroTrustMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
