@@ -34,6 +34,7 @@ import KeyExchangeMcq from './components/questions/KeyExchangeMcq';
 import EncryptionTechnologiesMcq from './components/questions/EncryptionTechnologiesMcq';
 import ObfuscationMcq from './components/questions/ObfuscationMcq';
 import HashingSignaturesMcq from './components/questions/HashingSignaturesMcq';
+import BlockchainTechnologyMcq from './components/questions/BlockchainTechnologyMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -184,6 +185,7 @@ export default function App() {
               if (topicId === 'encryption_technologies_mcq') setCurrentView('encryption_technologies_mcq');
               if (topicId === 'obfuscation_mcq') setCurrentView('obfuscation_mcq');
               if (topicId === 'hashing_signatures_mcq') setCurrentView('hashing_signatures_mcq');
+              if (topicId === 'blockchain_technology_mcq') setCurrentView('blockchain_technology_mcq');
             }}
           />
         )}
@@ -778,6 +780,12 @@ export default function App() {
 
         {currentView === 'hashing_signatures_mcq' && (
           <HashingSignaturesMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'blockchain_technology_mcq' && (
+          <BlockchainTechnologyMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
