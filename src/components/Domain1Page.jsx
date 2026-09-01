@@ -108,6 +108,11 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
     onSelectTopic('change_management_mcq');
   };
 
+  const handleSelectTechnicalChangeManagementMcq = () => {
+    sounds.playSuccess();
+    onSelectTopic('technical_change_management_mcq');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -545,6 +550,46 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
               <div class="flex items-center gap-2">
                 <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
                 <span>Start Change Management Test 🔄</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE EXAM MODULE: 1.3 - Technical Change Management */}
+          <div 
+            onClick={handleSelectTechnicalChangeManagementMcq}
+            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                ⚙️
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.3</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  1.3 - Technical Change Management
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Practice CompTIA Security+ scenario questions on <strong>Allow Lists vs Deny Lists</strong>, <strong>HA Downtime Failover</strong>, <strong>Scope Control</strong>, <strong>System Dependencies</strong>, <strong>Configuration Version Control</strong>, and <strong>Diagram Documentation</strong>!
+              </p>
+
+              {/* Acronym Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Allow List vs Deny List</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">HA Failover & Zero Downtime</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Scope Control</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Library & Cross-System Dependencies</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Config Version Control & Diagrams</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Start Technical Change Test ⚙️</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
             </div>
