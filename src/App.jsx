@@ -29,6 +29,7 @@ import DeceptionDisruptionMcq from './components/questions/DeceptionDisruptionMc
 import ChangeManagementMcq from './components/questions/ChangeManagementMcq';
 import TechnicalChangeManagementMcq from './components/questions/TechnicalChangeManagementMcq';
 import PublicKeyInfrastructureMcq from './components/questions/PublicKeyInfrastructureMcq';
+import EncryptingDataMcq from './components/questions/EncryptingDataMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -174,6 +175,7 @@ export default function App() {
               if (topicId === 'change_management_mcq') setCurrentView('change_management_mcq');
               if (topicId === 'technical_change_management_mcq') setCurrentView('technical_change_management_mcq');
               if (topicId === 'pki_mcq') setCurrentView('pki_mcq');
+              if (topicId === 'encrypting_data_mcq') setCurrentView('encrypting_data_mcq');
             }}
           />
         )}
@@ -738,6 +740,12 @@ export default function App() {
 
         {currentView === 'pki_mcq' && (
           <PublicKeyInfrastructureMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'encrypting_data_mcq' && (
+          <EncryptingDataMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
