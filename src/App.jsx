@@ -18,6 +18,7 @@ import DeceptionDisruptionSim from './components/simulations/DeceptionDisruption
 import ChangeManagementSim from './components/simulations/ChangeManagementSim';
 import ObfuscationSim from './components/simulations/ObfuscationSim';
 import HashingSignaturesSim from './components/simulations/HashingSignaturesSim';
+import SecurityControlsMcq from './components/questions/SecurityControlsMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -152,6 +153,7 @@ export default function App() {
               if (topicId === 'change_management') setCurrentView('change_management');
               if (topicId === 'obfuscation') setCurrentView('obfuscation');
               if (topicId === 'hashing_signatures') setCurrentView('hashing_signatures');
+              if (topicId === 'security_controls_mcq') setCurrentView('security_controls_mcq');
             }}
           />
         )}
@@ -651,6 +653,12 @@ export default function App() {
         {currentView === 'log_data_mcq' && (
           <LogDataMcq
             onBack={() => setCurrentView('domain4')}
+          />
+        )}
+
+        {currentView === 'security_controls_mcq' && (
+          <SecurityControlsMcq
+            onBack={() => setCurrentView('domain1')}
           />
         )}
 
