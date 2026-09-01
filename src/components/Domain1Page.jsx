@@ -68,6 +68,11 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
     onSelectTopic('security_controls_mcq');
   };
 
+  const handleSelectCiaTriadMcq = () => {
+    sounds.playSuccess();
+    onSelectTopic('cia_triad_mcq');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -155,9 +160,44 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
             </div>
           </div>
 
-          {/* ACTIVE SIMULATION: 1.2 - The CIA & AIC Triad */}
+          {/* ACTIVE SIMULATION: 1.2 - The CIA & AIC Triad Simulation */}
           <div 
             onClick={handleSelectCia}
+            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                🧩
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2 • Simulation</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  CIA & AIC Triad Interactive Toy
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Interactive visual playground for Confidentiality, Integrity, Availability, and the ER-focused AIC Triad.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Interactive Simulation</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Launch Interactive Toy 🧩</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">Interactive</span>
+            </div>
+          </div>
+
+          {/* ACTIVE EXAM MODULE: 1.2 - The CIA Triad MCQs */}
+          <div 
+            onClick={handleSelectCiaTriadMcq}
             class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
           >
             <div class="space-y-4">
@@ -168,33 +208,30 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
               <div>
                 <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
                 <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  The CIA & AIC Triad
+                  1.2 - The CIA Triad
                 </h3>
               </div>
 
               <p class="text-slate-600 text-sm leading-relaxed">
-                Learn the 3 golden pillars of security: Keeping Secrets (<strong>Confidentiality</strong>), Stopping Sneaky Edits (<strong>Integrity</strong>), and Keeping Systems Ready (<strong>Availability</strong>). Plus, learn why Emergency Rooms use <strong>AIC</strong>!
+                Practice CompTIA Security+ scenario questions on <strong>Confidentiality</strong> (Encryption & MFA), <strong>Integrity</strong> (Hashing & Digital Signatures), <strong>Availability</strong> (Redundancy & Fault Tolerance), <strong>Non-repudiation</strong>, and the <strong>AIC Triad</strong>!
               </p>
 
               {/* Acronym Badges */}
-              <div class="space-y-2 pt-1">
-                <div class="flex items-center gap-2 p-2 rounded-xl bg-amber-50 border border-amber-200/80">
-                  <span class="font-extrabold text-amber-900 text-sm w-12">CIA:</span>
-                  <span class="text-xs font-bold text-slate-700">Confidentiality, Integrity, Availability</span>
-                </div>
-                <div class="flex items-center gap-2 p-2 rounded-xl bg-amber-50 border border-amber-200/80">
-                  <span class="font-extrabold text-amber-900 text-sm w-12">AIC:</span>
-                  <span class="text-xs font-bold text-slate-700">Availability, Integrity, Confidentiality</span>
-                </div>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Confidentiality & Encryption</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Integrity & Hashing</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Availability & Redundancy</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Non-repudiation & Signatures</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">AIC Triad Prioritization</span>
               </div>
             </div>
 
             <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
               <div class="flex items-center gap-2">
                 <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Triad Playground</span>
+                <span>Start CIA Triad Test 🔐</span>
               </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">5 Mini-Toys</span>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
             </div>
           </div>
 
