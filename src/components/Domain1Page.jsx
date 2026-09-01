@@ -133,6 +133,11 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
     onSelectTopic('encryption_technologies_mcq');
   };
 
+  const handleSelectObfuscationMcq = () => {
+    sounds.playSuccess();
+    onSelectTopic('obfuscation_mcq');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -770,6 +775,46 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
               <div class="flex items-center gap-2">
                 <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
                 <span>Start Encryption Technologies Test 💻</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE EXAM MODULE: 1.4 - Obfuscation */}
+          <div 
+            onClick={handleSelectObfuscationMcq}
+            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                🙈
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  1.4 - Obfuscation
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Practice CompTIA Security+ scenario questions on <strong>Steganography (Image LSB, Audio, Printer Watermarks)</strong>, <strong>Tokenization (NFC Mobile Payments)</strong>, <strong>Data Masking</strong>, and <strong>Code Obfuscation</strong>!
+              </p>
+
+              {/* Acronym Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Steganography & Covertext</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Tokenization vs Encryption</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Token Service Vault</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Data Masking (PII Protection)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Printer Watermark & Code Obfuscation</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Start Obfuscation Test 🙈</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
             </div>
