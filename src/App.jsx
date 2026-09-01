@@ -28,6 +28,7 @@ import PhysicalSecurityMcq from './components/questions/PhysicalSecurityMcq';
 import DeceptionDisruptionMcq from './components/questions/DeceptionDisruptionMcq';
 import ChangeManagementMcq from './components/questions/ChangeManagementMcq';
 import TechnicalChangeManagementMcq from './components/questions/TechnicalChangeManagementMcq';
+import PublicKeyInfrastructureMcq from './components/questions/PublicKeyInfrastructureMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -172,6 +173,7 @@ export default function App() {
               if (topicId === 'deception_disruption_mcq') setCurrentView('deception_disruption_mcq');
               if (topicId === 'change_management_mcq') setCurrentView('change_management_mcq');
               if (topicId === 'technical_change_management_mcq') setCurrentView('technical_change_management_mcq');
+              if (topicId === 'pki_mcq') setCurrentView('pki_mcq');
             }}
           />
         )}
@@ -730,6 +732,12 @@ export default function App() {
 
         {currentView === 'technical_change_management_mcq' && (
           <TechnicalChangeManagementMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'pki_mcq' && (
+          <PublicKeyInfrastructureMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
