@@ -138,6 +138,11 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
     onSelectTopic('obfuscation_mcq');
   };
 
+  const handleSelectHashingSignaturesMcq = () => {
+    sounds.playSuccess();
+    onSelectTopic('hashing_signatures_mcq');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -815,6 +820,46 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
               <div class="flex items-center gap-2">
                 <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
                 <span>Start Obfuscation Test 🙈</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE EXAM MODULE: 1.4 - Hashing and Digital Signatures */}
+          <div 
+            onClick={handleSelectHashingSignaturesMcq}
+            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                🔏
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  1.4 - Hashing and Digital Signatures
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Practice CompTIA Security+ scenario questions on <strong>Hashes (SHA-256)</strong>, <strong>Hash Collisions (MD5)</strong>, <strong>Salting Hashes (defeating Rainbow Tables)</strong>, and <strong>Digital Signatures (Sign with Private, Verify with Public)</strong>!
+              </p>
+
+              {/* Acronym Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">One-Way Message Digest (Integrity)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Hash Collisions (MD5 Weakness)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Salting Hashes (Anti-Rainbow Table)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Digital Signatures (Sign: Priv / Verify: Pub)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Integrity, Authentication & Non-repudiation</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Start Hashing & Signatures Test 🔏</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
             </div>
