@@ -31,6 +31,7 @@ import TechnicalChangeManagementMcq from './components/questions/TechnicalChange
 import PublicKeyInfrastructureMcq from './components/questions/PublicKeyInfrastructureMcq';
 import EncryptingDataMcq from './components/questions/EncryptingDataMcq';
 import KeyExchangeMcq from './components/questions/KeyExchangeMcq';
+import EncryptionTechnologiesMcq from './components/questions/EncryptionTechnologiesMcq';
 import ThreatVectorsMcq from './components/questions/ThreatVectorsMcq';
 import PhishingMcq from './components/questions/PhishingMcq';
 import ImpersonationMcq from './components/questions/ImpersonationMcq';
@@ -178,6 +179,7 @@ export default function App() {
               if (topicId === 'pki_mcq') setCurrentView('pki_mcq');
               if (topicId === 'encrypting_data_mcq') setCurrentView('encrypting_data_mcq');
               if (topicId === 'key_exchange_mcq') setCurrentView('key_exchange_mcq');
+              if (topicId === 'encryption_technologies_mcq') setCurrentView('encryption_technologies_mcq');
             }}
           />
         )}
@@ -754,6 +756,12 @@ export default function App() {
 
         {currentView === 'key_exchange_mcq' && (
           <KeyExchangeMcq
+            onBack={() => setCurrentView('domain1')}
+          />
+        )}
+
+        {currentView === 'encryption_technologies_mcq' && (
+          <EncryptionTechnologiesMcq
             onBack={() => setCurrentView('domain1')}
           />
         )}
