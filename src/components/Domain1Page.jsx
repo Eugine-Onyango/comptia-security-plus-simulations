@@ -93,6 +93,11 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
     onSelectTopic('zero_trust_mcq');
   };
 
+  const handleSelectPhysicalSecurityMcq = () => {
+    sounds.playSuccess();
+    onSelectTopic('physical_security_mcq');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -410,6 +415,46 @@ export default function Domain1Page({ onBack, onSelectTopic }) {
               <div class="flex items-center gap-2">
                 <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
                 <span>Start Zero Trust Test 🛡️</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE EXAM MODULE: 1.2 - Physical Security */}
+          <div 
+            onClick={handleSelectPhysicalSecurityMcq}
+            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                🏢
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  1.2 - Physical Security
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Practice CompTIA Security+ scenario questions on <strong>Bollards & Barricades</strong>, <strong>Access Control Vestibules (Mantraps)</strong>, <strong>Two-Person Integrity</strong>, <strong>CCTV Analytics</strong>, <strong>Perimeter Lighting</strong>, and <strong>Sensors (Infrared/Pressure/Microwave/Ultrasonic)</strong>!
+              </p>
+
+              {/* Acronym Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Bollards & Vehicle Barriers</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Access Control Vestibules (Mantraps)</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Two-Person Integrity</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">CCTV Video Analytics</span>
+                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Infrared / Pressure / Ultrasonic Sensors</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Start Physical Security Test 🏢</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
             </div>
