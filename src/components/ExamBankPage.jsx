@@ -98,12 +98,12 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
     },
     {
       id: 'domain5_dumps_batch11',
-      title: 'Batch 11: Questions 201 - 227',
+      title: 'Batch 11: Questions 201 - 227 🎓',
       subtitle: 'Hybrid Work Security, ISO 27002 Guidelines, Insider Threats, Social Engineering, Security Awareness Metrics',
-      status: 'pending',
+      status: 'active',
       count: 27,
-      verified: false,
-      tags: ['Final Batch']
+      verified: true,
+      tags: ['Q201-Q227 Verified', 'Final Batch Complete', 'Option Shuffling', 'Layman Explanations']
     }
   ];
 
@@ -151,13 +151,13 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 shadow-sm shrink-0 space-y-2 min-w-[240px]">
           <div className="flex items-center justify-between text-xs font-bold text-purple-200">
             <span>Overall Bank Progress</span>
-            <span className="text-amber-300 font-black">200 / 227 Questions</span>
+            <span className="text-emerald-300 font-black">227 / 227 Questions 🎉</span>
           </div>
           <div className="w-full bg-black/30 h-3 rounded-full overflow-hidden p-0.5 border border-white/20">
-            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[88%]" />
+            <div className="bg-gradient-to-r from-emerald-400 to-teal-300 h-full rounded-full w-[100%]" />
           </div>
-          <div className="text-[11px] text-purple-200 font-medium text-center pt-1">
-            Batches 1 - 10 Active • 27 Questions Pending (Final Batch!)
+          <div className="text-[11px] text-emerald-200 font-bold text-center pt-1">
+            🌟 ALL 11 BATCHES ACTIVE • 100% VERIFIED!
           </div>
         </div>
       </div>
