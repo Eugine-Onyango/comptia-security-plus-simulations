@@ -80,6 +80,54 @@ export default function HomePage({ onSelectDomain }) {
         {/* Domain Cards Grid */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+          {/* FEATURED: Official Exam Question Bank Vault */}
+          <div 
+            onClick={() => handleSelect('exam_bank')}
+            class="group bg-gradient-to-br from-purple-700 via-indigo-700 to-purple-900 text-white rounded-3xl p-6 border-4 border-amber-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-yellow-300 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4" />
+                  <span>DUMPS_BASE.pdf • 227 Questions Bank</span>
+                </div>
+                <span class="px-3 py-1 bg-amber-400 text-amber-950 font-black text-xs rounded-full shadow-sm">
+                  NEW DEDICATED VAULT
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  📜
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-yellow-300 transition-colors">
+                    Official CompTIA Security+ Exam Question Bank
+                  </h3>
+                  <p class="text-purple-100 text-sm font-medium mt-1">
+                    Practice all 227 official exam dump questions from <strong>DUMPS_BASE.pdf</strong> in a clean, dedicated hub with verified answers, layman explanations, and option shuffling!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Batch 1 (Q1-Q20 Active)</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Option Shuffling (A, B, C, D)</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Layman's Terms & Distractor Breakdown</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-purple-500/50 flex items-center justify-between text-yellow-300 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-amber-400 group-hover:translate-x-1 transition-transform" />
+                <span>Open Dedicated Exam Question Bank Vault →</span>
+              </span>
+              <span class="px-3 py-1 bg-amber-400 text-amber-950 rounded-full font-black text-xs">
+                Enter Vault 📜
+              </span>
+            </div>
+          </div>
+
           {/* Domain 1.0 Card */}
           <div
             onClick={() => handleSelect('domain1')}

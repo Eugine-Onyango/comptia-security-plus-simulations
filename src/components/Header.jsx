@@ -38,6 +38,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
 
         {/* Navigation & Controls */}
         <div class="flex items-center gap-3">
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('exam_bank'); }}
+            class={`flex items-center gap-2 px-4 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'exam_bank'
+                ? 'bg-purple-600 border-purple-700 text-white shadow-purple-200'
+                : 'bg-purple-100 hover:bg-purple-200 border-purple-300 text-purple-950'
+            }`}
+          >
+            <span>📜 Exam Question Bank</span>
+          </button>
+
           {currentView !== 'home' && (
             <button
               onClick={goHome}

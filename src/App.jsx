@@ -6,6 +6,7 @@ import Domain2Page from './components/Domain2Page';
 import Domain3Page from './components/Domain3Page';
 import Domain4Page from './components/Domain4Page';
 import Domain5Page from './components/Domain5Page';
+import ExamBankPage from './components/ExamBankPage';
 import CiaTriadSim from './components/simulations/CiaTriadSim';
 import CertificatesSim from './components/simulations/CertificatesSim';
 import EncryptionTechSim from './components/simulations/EncryptionTechSim';
@@ -151,6 +152,16 @@ export default function App() {
               if (domainId === 'domain3') setCurrentView('domain3');
               if (domainId === 'domain4') setCurrentView('domain4');
               if (domainId === 'domain5') setCurrentView('domain5');
+              if (domainId === 'exam_bank') setCurrentView('exam_bank');
+            }}
+          />
+        )}
+
+        {currentView === 'exam_bank' && (
+          <ExamBankPage
+            onBack={() => setCurrentView('home')}
+            onSelectBatch={(batchId) => {
+              if (batchId === 'domain5_dumps_batch1') setCurrentView('domain5_dumps_batch1');
             }}
           />
         )}
