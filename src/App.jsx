@@ -101,6 +101,7 @@ import IncidentPlanningMcq from './components/questions/IncidentPlanningMcq';
 import DigitalForensicsMcq from './components/questions/DigitalForensicsMcq';
 import LogDataMcq from './components/questions/LogDataMcq';
 import Domain5DumpsBatch1Mcq from './components/questions/Domain5DumpsBatch1Mcq';
+import Domain5DumpsBatch2Mcq from './components/questions/Domain5DumpsBatch2Mcq';
 import CloudInfrastructuresSim from './components/simulations/CloudInfrastructuresSim';
 import NetworkConceptsSim from './components/simulations/NetworkConceptsSim';
 import OtherInfraSim from './components/simulations/OtherInfraSim';
@@ -162,6 +163,7 @@ export default function App() {
             onBack={() => setCurrentView('home')}
             onSelectBatch={(batchId) => {
               if (batchId === 'domain5_dumps_batch1') setCurrentView('domain5_dumps_batch1');
+              if (batchId === 'domain5_dumps_batch2') setCurrentView('domain5_dumps_batch2');
             }}
           />
         )}
@@ -1035,7 +1037,13 @@ export default function App() {
 
         {currentView === 'domain5_dumps_batch1' && (
           <Domain5DumpsBatch1Mcq
-            onBack={() => setCurrentView('domain5')}
+            onBack={() => setCurrentView('exam_bank')}
+          />
+        )}
+
+        {currentView === 'domain5_dumps_batch2' && (
+          <Domain5DumpsBatch2Mcq
+            onBack={() => setCurrentView('exam_bank')}
           />
         )}
       </main>

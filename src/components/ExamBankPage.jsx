@@ -19,10 +19,10 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
       id: 'domain5_dumps_batch2',
       title: 'Batch 2: Questions 21 - 40',
       subtitle: 'Data Controller Roles, SLA Guarantees, Risk Appetite, Data Stewards, WAF Mitigations, Right-to-Audit',
-      status: 'pending',
+      status: 'active',
       count: 20,
-      verified: false,
-      tags: ['Upcoming Batch']
+      verified: true,
+      tags: ['Q21-Q40 Verified', 'Option Shuffling', 'Layman Explanations', 'Distractor Breakdown']
     },
     {
       id: 'domain5_dumps_batch3',
@@ -151,13 +151,13 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 shadow-sm shrink-0 space-y-2 min-w-[240px]">
           <div className="flex items-center justify-between text-xs font-bold text-purple-200">
             <span>Overall Bank Progress</span>
-            <span className="text-amber-300 font-black">20 / 227 Questions</span>
+            <span className="text-amber-300 font-black">40 / 227 Questions</span>
           </div>
           <div className="w-full bg-black/30 h-3 rounded-full overflow-hidden p-0.5 border border-white/20">
-            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[9%]" />
+            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[18%]" />
           </div>
           <div className="text-[11px] text-purple-200 font-medium text-center pt-1">
-            Batch 1 Active • 207 Questions Pending
+            Batches 1 & 2 Active • 187 Questions Pending
           </div>
         </div>
       </div>
