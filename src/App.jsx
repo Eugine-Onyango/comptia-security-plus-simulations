@@ -106,6 +106,7 @@ import Domain5DumpsBatch3Mcq from './components/questions/Domain5DumpsBatch3Mcq'
 import Domain5DumpsBatch4Mcq from './components/questions/Domain5DumpsBatch4Mcq';
 import Domain5DumpsBatch5Mcq from './components/questions/Domain5DumpsBatch5Mcq';
 import Domain5DumpsBatch6Mcq from './components/questions/Domain5DumpsBatch6Mcq';
+import Domain5DumpsBatch7Mcq from './components/questions/Domain5DumpsBatch7Mcq';
 import CloudInfrastructuresSim from './components/simulations/CloudInfrastructuresSim';
 import NetworkConceptsSim from './components/simulations/NetworkConceptsSim';
 import OtherInfraSim from './components/simulations/OtherInfraSim';
@@ -172,6 +173,7 @@ export default function App() {
               if (batchId === 'domain5_dumps_batch4') setCurrentView('domain5_dumps_batch4');
               if (batchId === 'domain5_dumps_batch5') setCurrentView('domain5_dumps_batch5');
               if (batchId === 'domain5_dumps_batch6') setCurrentView('domain5_dumps_batch6');
+              if (batchId === 'domain5_dumps_batch7') setCurrentView('domain5_dumps_batch7');
             }}
           />
         )}
@@ -1075,6 +1077,12 @@ export default function App() {
 
         {currentView === 'domain5_dumps_batch6' && (
           <Domain5DumpsBatch6Mcq
+            onBack={() => setCurrentView('exam_bank')}
+          />
+        )}
+
+        {currentView === 'domain5_dumps_batch7' && (
+          <Domain5DumpsBatch7Mcq
             onBack={() => setCurrentView('exam_bank')}
           />
         )}
