@@ -1,1403 +1,395 @@
-import React from 'react';
-import { ArrowLeft, Shield, PlayCircle, Key, Lock, Layers, Sparkles, CheckCircle2, FileText, Cpu, HardDrive, Building2, UserCheck, Ruler, Camera, Bug, ClipboardList, Fingerprint } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, Shield, PlayCircle, Key, Lock, Layers, Sparkles, CheckCircle2, FileText, Cpu, HardDrive, Building2, UserCheck, Ruler, Camera, Bug, ClipboardList, Fingerprint, Search, Gamepad2, BookOpen, Tag } from 'lucide-react';
 import { sounds } from '../utils/audio';
 
+const domain1Acronyms = [
+  { term: 'CIA / AIC', name: 'Confidentiality, Integrity, Availability', section: '1.2', desc: 'The foundational security triad balancing secrecy, data accuracy, and system uptime.' },
+  { term: 'AAA', name: 'Authentication, Authorization, Accounting', section: '1.2', desc: 'Access control framework verifying identity (AuthN), permissions (AuthZ), and audit logging.' },
+  { term: 'PKI', name: 'Public Key Infrastructure', section: '1.4', desc: 'Framework of policies, hardware, software, and CAs used to create and manage digital certificates.' },
+  { term: 'CA', name: 'Certificate Authority', section: '1.4', desc: 'Trusted third-party organization that validates identities and signs digital X.509 certificates.' },
+  { term: 'CSR', name: 'Certificate Signing Request', section: '1.4', desc: 'Applicant application sent to a CA containing public key and company identity info to be signed.' },
+  { term: 'CRL', name: 'Certificate Revocation List', section: '1.4', desc: 'Blacklist file maintained by a CA listing invalidated certificates prior to expiration.' },
+  { term: 'OCSP', name: 'Online Certificate Status Protocol', section: '1.4', desc: 'Real-time HTTP query protocol used by browsers to check certificate revocation status.' },
+  { term: 'SAN', name: 'Subject Alternative Name', section: '1.4', desc: 'X.509 certificate extension allowing one certificate to secure multiple subdomains (*.domain.com).' },
+  { term: 'TPM', name: 'Trusted Platform Module', section: '1.4', desc: 'Hardware crypto chip soldered onto motherboards storing BitLocker keys and boot measurements.' },
+  { term: 'HSM', name: 'Hardware Security Module', section: '1.4', desc: 'Rack-mount enterprise appliance storing thousands of master root keys and offloading SSL processing.' },
+  { term: 'KMS', name: 'Key Management System', section: '1.4', desc: 'Centralized console managing key creation, rotation, and enforcing key separation from stored data.' },
+  { term: 'FDE', name: 'Full-Disk Encryption', section: '1.4', desc: 'Protects data at rest by encrypting the entire storage drive (BitLocker, FileVault).' },
+  { term: 'EFS', name: 'Encrypting File System', section: '1.4', desc: 'Windows built-in feature providing file-level and folder-level encryption.' },
+  { term: 'AES', name: 'Advanced Encryption Standard', section: '1.4', desc: 'Fast, secure symmetric block cipher algorithm using 128-bit or 256-bit secret keys.' },
+  { term: 'RSA', name: 'Rivest-Shamir-Adleman', section: '1.4', desc: 'Asymmetric algorithm relying on large prime number factorization for keys (3072+ bits).' },
+  { term: 'DH', name: 'Diffie-Hellman', section: '1.4', desc: 'Key exchange agreement deriving a shared symmetric key from asymmetric key pairs over the wire.' },
+  { term: 'PFS', name: 'Perfect Forward Secrecy', section: '1.4', desc: 'Uses ephemeral session keys so compromising long-term private keys cannot decrypt past sessions.' },
+  { term: 'PBKDF2', name: 'Password-Based Key Derivation Function 2', section: '1.4', desc: 'Key stretching algorithm running thousands of hash iterations to slow down password cracking.' },
+  { term: 'TDE', name: 'Transparent Data Encryption', section: '1.4', desc: 'Database engine feature encrypting entire database files automatically.' },
+  { term: 'LSB', name: 'Least Significant Bit', section: '1.4', desc: 'Steganography technique embedding secret data into invisible bits of image/audio covertext.' },
+  { term: 'NFC', name: 'Near Field Communication', section: '1.4', desc: 'Short-range wireless protocol used in mobile tokenization payments (Apple Pay, Google Pay).' },
+  { term: 'CAB', name: 'Change Advisory Board', section: '1.3', desc: 'Cross-functional committee reviewing, assessing, and approving technical change requests.' },
+  { term: 'NIST', name: 'National Institute of Standards and Technology', section: '1.2', desc: 'US agency establishing cybersecurity frameworks (e.g. NIST SP 800-171, NIST CSF).' },
+  { term: 'ISO', name: 'International Organization for Standardization', section: '1.2', desc: 'Global standards body defining ISO/IEC 27001 cybersecurity management standards.' }
+];
+
 export default function Domain1Page({ onBack, onSelectTopic }) {
-  const handleSelectCia = () => {
-    sounds.playSuccess();
-    onSelectTopic('cia');
-  };
+  const [activeTab, setActiveTab] = useState('all'); // 'all' | 'simulations' | 'mcqs' | 'acronyms'
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSelectHashing = () => {
-    sounds.playSuccess();
-    onSelectTopic('hashing_signatures');
-  };
+  // Handlers for Interactive PBQ Simulations
+  const handleSelectCia = () => { sounds.playSuccess(); onSelectTopic('cia'); };
+  const handleSelectHashing = () => { sounds.playSuccess(); onSelectTopic('hashing_signatures'); };
+  const handleSelectObfuscation = () => { sounds.playSuccess(); onSelectTopic('obfuscation'); };
+  const handleSelectChangePki = () => { sounds.playSuccess(); onSelectTopic('change_management'); };
+  const handleSelectDeception = () => { sounds.playSuccess(); onSelectTopic('deception_disruption'); };
+  const handleSelectPhysicalSec = () => { sounds.playSuccess(); onSelectTopic('physical_security'); };
+  const handleSelectAaa = () => { sounds.playSuccess(); onSelectTopic('aaa_framework'); };
+  const handleSelectZeroTrust = () => { sounds.playSuccess(); onSelectTopic('zero_trust'); };
+  const handleSelectGapAnalysis = () => { sounds.playSuccess(); onSelectTopic('gap_analysis'); };
+  const handleSelectEncryptingData = () => { sounds.playSuccess(); onSelectTopic('encrypting_data'); };
+  const handleSelectCertificates = () => { sounds.playSuccess(); onSelectTopic('certificates'); };
+  const handleSelectEncryptionTech = () => { sounds.playSuccess(); onSelectTopic('encryption_technologies'); };
 
-  const handleSelectObfuscation = () => {
-    sounds.playSuccess();
-    onSelectTopic('obfuscation');
-  };
+  // Handlers for MCQ Practice Tests
+  const handleSelectSecurityControls = () => { sounds.playSuccess(); onSelectTopic('security_controls'); };
+  const handleSelectCiaTriadMcq = () => { sounds.playSuccess(); onSelectTopic('cia_triad_mcq'); };
+  const handleSelectNonRepudiationMcq = () => { sounds.playSuccess(); onSelectTopic('non_repudiation_mcq'); };
+  const handleSelectAaaFrameworkMcq = () => { sounds.playSuccess(); onSelectTopic('aaa_framework_mcq'); };
+  const handleSelectGapAnalysisMcq = () => { sounds.playSuccess(); onSelectTopic('gap_analysis_mcq'); };
+  const handleSelectZeroTrustMcq = () => { sounds.playSuccess(); onSelectTopic('zero_trust_mcq'); };
+  const handleSelectPhysicalSecurityMcq = () => { sounds.playSuccess(); onSelectTopic('physical_security_mcq'); };
+  const handleSelectDeceptionDisruptionMcq = () => { sounds.playSuccess(); onSelectTopic('deception_disruption_mcq'); };
+  const handleSelectChangeManagementMcq = () => { sounds.playSuccess(); onSelectTopic('change_management_mcq'); };
+  const handleSelectTechnicalChangeManagementMcq = () => { sounds.playSuccess(); onSelectTopic('technical_change_management_mcq'); };
+  const handleSelectPkiMcq = () => { sounds.playSuccess(); onSelectTopic('pki_mcq'); };
+  const handleSelectEncryptingDataMcq = () => { sounds.playSuccess(); onSelectTopic('encrypting_data_mcq'); };
+  const handleSelectKeyExchangeMcq = () => { sounds.playSuccess(); onSelectTopic('key_exchange_mcq'); };
+  const handleSelectEncryptionTechnologiesMcq = () => { sounds.playSuccess(); onSelectTopic('encryption_technologies_mcq'); };
+  const handleSelectObfuscationMcq = () => { sounds.playSuccess(); onSelectTopic('obfuscation_mcq'); };
+  const handleSelectHashingSignaturesMcq = () => { sounds.playSuccess(); onSelectTopic('hashing_signatures_mcq'); };
+  const handleSelectBlockchainTechnologyMcq = () => { sounds.playSuccess(); onSelectTopic('blockchain_technology_mcq'); };
+  const handleSelectCertificatesMcq = () => { sounds.playSuccess(); onSelectTopic('certificates_mcq'); };
 
-  const handleSelectChangePki = () => {
-    sounds.playSuccess();
-    onSelectTopic('change_management');
-  };
+  // Data definitions for clean rendering & filtering
+  const simulations = [
+    { title: '1.2 - The CIA & AIC Triad Lab', section: 'Section 1.2', desc: 'Interactive simulation testing Confidentiality, Integrity, and Availability controls.', icon: '🧩', action: handleSelectCia, badges: ['Confidentiality', 'Integrity', 'Availability'] },
+    { title: '1.2 - AAA Framework Lab', section: 'Section 1.2', desc: 'Interactive tool demonstrating Authentication, Authorization, and Accounting flows.', icon: '🔑', action: handleSelectAaa, badges: ['Authentication', 'Authorization', 'Accounting'] },
+    { title: '1.2 - Gap Analysis Heatmap Tool', section: 'Section 1.2', desc: 'Visual gap analysis matrix evaluating current baseline controls against target frameworks.', icon: '📊', action: handleSelectGapAnalysis, badges: ['NIST SP 800-171', 'ISO 27001', 'Baseline Heatmap'] },
+    { title: '1.2 - Zero Trust Architecture Lab', section: 'Section 1.2', desc: 'Interactive policy engine (PDP) and enforcement point (PEP) network simulator.', icon: '🛡️', action: handleSelectZeroTrust, badges: ['PDP Policy Engine', 'PEP Enforcement', 'Microsegmentation'] },
+    { title: '1.2 - Physical Security Vestibule Lab', section: 'Section 1.2', desc: 'Interactive Access Control Vestibule (Mantrap) and physical barrier simulator.', icon: '🚪', action: handleSelectPhysicalSec, badges: ['Access Control Vestibule', 'Bollards', 'Sensors'] },
+    { title: '1.2 - Deception & Honeypot Lab', section: 'Section 1.2', desc: 'Interactive Honeypot, Honeynet, and Honeytoken attacker disruption tool.', icon: '🍯', action: handleSelectDeception, badges: ['Honeypot', 'Honeyfile', 'Honeytoken API'] },
+    { title: '1.3 - Technical Change Management Lab', section: 'Section 1.3', desc: 'Interactive CAB approval workflow, allow/deny list tester, and HA backout plan lab.', icon: '⚙️', action: handleSelectChangePki, badges: ['CAB Approval', 'Backout Plan', 'Allow/Deny List'] },
+    { title: '1.4 - Encrypting Data & Key Stretching Lab', section: 'Section 1.4', desc: 'Interactive tool calculating PBKDF2/bcrypt key stretching rounds and BitLocker FDE.', icon: '🔐', action: handleSelectEncryptingData, badges: ['BitLocker FDE', 'PBKDF2 Stretching', 'Column Encryption'] },
+    { title: '1.4 - Encryption Technologies & HSM Lab', section: 'Section 1.4', desc: 'Interactive lab comparing motherboard TPM chips with enterprise rackmount HSM appliances.', icon: '💻', action: handleSelectEncryptionTech, badges: ['TPM Motherboard', 'HSM Appliance', 'Secure Enclave'] },
+    { title: '1.4 - Obfuscation & Steganography Lab', section: 'Section 1.4', desc: 'Interactive least-significant-bit (LSB) image steganography and tokenization tool.', icon: '🙈', action: handleSelectObfuscation, badges: ['Image LSB', 'Token Vault', 'Data Masking'] },
+    { title: '1.4 - Hashing & Digital Signatures Lab', section: 'Section 1.4', desc: 'Interactive hash generator (SHA-256 vs MD5) and digital signature creation lab.', icon: '🔏', action: handleSelectHashing, badges: ['SHA-256 Hash', 'Salt', 'Private Key Signing'] },
+    { title: '1.4 - Digital Certificates & OCSP Lab', section: 'Section 1.4', desc: 'Interactive CSR generator, Wildcard certificate manager, and OCSP Stapling tool.', icon: '📜', action: handleSelectCertificates, badges: ['CSR Generator', 'OCSP Stapling', 'Wildcard Certs'] }
+  ];
 
-  const handleSelectDeception = () => {
-    sounds.playSuccess();
-    onSelectTopic('deception_disruption');
-  };
+  const mcqs = [
+    { title: '1.1 - Security Controls Practice', section: 'Section 1.1', desc: 'Scenario questions on Technical, Operational, Managerial, and Physical control types.', icon: '🛡️', action: handleSelectSecurityControls, badges: ['Preventive', 'Detective', 'Corrective', 'Compensating'] },
+    { title: '1.2 - The CIA Triad Practice', section: 'Section 1.2', desc: 'Scenario questions on Confidentiality, Integrity, Availability, and non-repudiation.', icon: '📐', action: handleSelectCiaTriadMcq, badges: ['CIA Triad', 'Non-repudiation', 'AIC Balance'] },
+    { title: '1.2 - Non-repudiation Practice', section: 'Section 1.2', desc: 'Scenario questions on digital proof of origin, Avalanche effect, and tamper evidence.', icon: '🖋️', action: handleSelectNonRepudiationMcq, badges: ['Proof of Origin', 'Digital Signatures', 'Hash Integrity'] },
+    { title: '1.2 - AAA Framework Practice', section: 'Section 1.2', desc: 'Scenario questions on Identification, Authentication, Authorization, and Audit Logs.', icon: '🔐', action: handleSelectAaaFrameworkMcq, badges: ['AuthN', 'AuthZ', 'Accounting', 'Headless CA'] },
+    { title: '1.2 - Gap Analysis Practice', section: 'Section 1.2', desc: 'Scenario questions on NIST SP 800-171, ISO 27001 baselines, and evaluation heatmaps.', icon: '📊', action: handleSelectGapAnalysisMcq, badges: ['NIST 800-171', 'ISO 27001', 'People & Processes'] },
+    { title: '1.2 - Zero Trust Practice', section: 'Section 1.2', desc: 'Scenario questions on Never Trust Always Verify, PDP, PEP, and Adaptive Identity.', icon: '🛑', action: handleSelectZeroTrustMcq, badges: ['Policy Engine', 'Enforcement Point', 'Microsegmentation'] },
+    { title: '1.2 - Physical Security Practice', section: 'Section 1.2', desc: 'Scenario questions on Bollards, Mantraps, Two-Person Integrity, and CCTV Analytics.', icon: '🏢', action: handleSelectPhysicalSecurityMcq, badges: ['Mantraps', 'Bollards', 'CCTV Analytics'] },
+    { title: '1.2 - Deception and Disruption Practice', section: 'Section 1.2', desc: 'Scenario questions on Honeypots, Honeynets, Honeyfiles, and Honeytokens.', icon: '🍯', action: handleSelectDeceptionDisruptionMcq, badges: ['Honeypot', 'Honeyfile', 'Honeytoken API'] },
+    { title: '1.3 - Change Management Practice', section: 'Section 1.3', desc: 'Scenario questions on CAB approval, backout plans, sandbox testing, and freezes.', icon: '📋', action: handleSelectChangeManagementMcq, badges: ['CAB Process', 'Backout Plan', 'Maintenance Freeze'] },
+    { title: '1.3 - Technical Change Management Practice', section: 'Section 1.3', desc: 'Scenario questions on Allow/Deny lists, HA failover, dependencies, and version control.', icon: '⚙️', action: handleSelectTechnicalChangeManagementMcq, badges: ['Allow vs Deny', 'HA Failover', 'Version Control'] },
+    { title: '1.4 - Public Key Infrastructure Practice', section: 'Section 1.4', desc: 'Scenario questions on Asymmetric vs Symmetric encryption, CA, and Key Escrow.', icon: '🔑', action: handleSelectPkiMcq, badges: ['Asymmetric Keys', 'CA & PKI', 'Key Escrow'] },
+    { title: '1.4 - Encrypting Data Practice', section: 'Section 1.4', desc: 'Scenario questions on Data at Rest (BitLocker), Column Encryption, and Key Stretching.', icon: '🔐', action: handleSelectEncryptingDataMcq, badges: ['Full-Disk Encryption', 'PBKDF2', 'Kerckhoffs'] },
+    { title: '1.4 - Key Exchange Practice', section: 'Section 1.4', desc: 'Scenario questions on Out-of-Band exchange, Diffie-Hellman (DH), and Ephemeral Keys.', icon: '🔄', action: handleSelectKeyExchangeMcq, badges: ['Diffie-Hellman', 'Ephemeral Keys', 'PFS'] },
+    { title: '1.4 - Encryption Technologies Practice', section: 'Section 1.4', desc: 'Scenario questions on TPM motherboard chips, enterprise HSM, and KMS key separation.', icon: '💻', action: handleSelectEncryptionTechnologiesMcq, badges: ['TPM Chip', 'HSM Appliance', 'KMS Separation'] },
+    { title: '1.4 - Obfuscation Practice', section: 'Section 1.4', desc: 'Scenario questions on Steganography LSB, Tokenization (NFC), and Data Masking.', icon: '🙈', action: handleSelectObfuscationMcq, badges: ['Steganography', 'Token Vault', 'Data Masking'] },
+    { title: '1.4 - Hashing and Digital Signatures Practice', section: 'Section 1.4', desc: 'Scenario questions on SHA-256, MD5 Collisions, Salting Hashes, and Digital Signatures.', icon: '🔏', action: handleSelectHashingSignaturesMcq, badges: ['SHA-256', 'Salting Hashes', 'Digital Signatures'] },
+    { title: '1.4 - Blockchain Technology Practice', section: 'Section 1.4', desc: 'Scenario questions on Distributed Ledgers, Cryptographic Chaining, and Consensus.', icon: '⛓️', action: handleSelectBlockchainTechnologyMcq, badges: ['Distributed Ledger', 'Block Chaining', 'Consensus'] },
+    { title: '1.4 - Certificates Practice', section: 'Section 1.4', desc: 'Scenario questions on CSR, Wildcard certs, CRL, OCSP, and OCSP Stapling.', icon: '📜', action: handleSelectCertificatesMcq, badges: ['CSR Request', 'OCSP Stapling', 'Wildcard Certs'] }
+  ];
 
-  const handleSelectPhysicalSec = () => {
-    sounds.playSuccess();
-    onSelectTopic('physical_security');
-  };
+  // Filtering helpers based on search
+  const filteredSimulations = simulations.filter(s => 
+    s.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    s.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    s.badges.some(b => b.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
-  const handleSelectAaa = () => {
-    sounds.playSuccess();
-    onSelectTopic('aaa_framework');
-  };
+  const filteredMcqs = mcqs.filter(m => 
+    m.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    m.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    m.badges.some(b => b.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
-  const handleSelectZeroTrust = () => {
-    sounds.playSuccess();
-    onSelectTopic('zero_trust');
-  };
-
-  const handleSelectGapAnalysis = () => {
-    sounds.playSuccess();
-    onSelectTopic('gap_analysis');
-  };
-
-  const handleSelectCertificates = () => {
-    sounds.playSuccess();
-    onSelectTopic('certificates');
-  };
-
-  const handleSelectEncryptionTech = () => {
-    sounds.playSuccess();
-    onSelectTopic('encryption_tech');
-  };
-
-  const handleSelectEncryptingData = () => {
-    sounds.playSuccess();
-    onSelectTopic('encrypting_data');
-  };
-
-  const handleSelectSecurityControls = () => {
-    sounds.playSuccess();
-    onSelectTopic('security_controls_mcq');
-  };
-
-  const handleSelectCiaTriadMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('cia_triad_mcq');
-  };
-
-  const handleSelectNonRepudiationMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('non_repudiation_mcq');
-  };
-
-  const handleSelectAaaFrameworkMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('aaa_framework_mcq');
-  };
-
-  const handleSelectGapAnalysisMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('gap_analysis_mcq');
-  };
-
-  const handleSelectZeroTrustMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('zero_trust_mcq');
-  };
-
-  const handleSelectPhysicalSecurityMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('physical_security_mcq');
-  };
-
-  const handleSelectDeceptionDisruptionMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('deception_disruption_mcq');
-  };
-
-  const handleSelectChangeManagementMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('change_management_mcq');
-  };
-
-  const handleSelectTechnicalChangeManagementMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('technical_change_management_mcq');
-  };
-
-  const handleSelectPkiMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('pki_mcq');
-  };
-
-  const handleSelectEncryptingDataMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('encrypting_data_mcq');
-  };
-
-  const handleSelectKeyExchangeMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('key_exchange_mcq');
-  };
-
-  const handleSelectEncryptionTechnologiesMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('encryption_technologies_mcq');
-  };
-
-  const handleSelectObfuscationMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('obfuscation_mcq');
-  };
-
-  const handleSelectHashingSignaturesMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('hashing_signatures_mcq');
-  };
-
-  const handleSelectBlockchainTechnologyMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('blockchain_technology_mcq');
-  };
-
-  const handleSelectCertificatesMcq = () => {
-    sounds.playSuccess();
-    onSelectTopic('certificates_mcq');
-  };
+  const filteredAcronyms = domain1Acronyms.filter(a => 
+    a.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    a.desc.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
       {/* Navigation Breadcrumb */}
-      <div class="flex items-center gap-3">
+      <div className="flex items-center gap-3">
         <button
           onClick={onBack}
-          class="flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-amber-100 text-amber-900 border-2 border-amber-200 rounded-2xl font-bold text-sm transition-all shadow-sm active:scale-95"
+          className="flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-amber-100 text-amber-900 border-2 border-amber-200 rounded-2xl font-bold text-sm transition-all shadow-sm active:scale-95"
         >
-          <ArrowLeft class="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4" />
           <span>Back to All Domains</span>
         </button>
       </div>
 
       {/* Header Banner */}
-      <div class="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 rounded-3xl p-6 sm:p-8 text-amber-950 shadow-lg shadow-amber-200/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div class="space-y-2 max-w-2xl">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 text-amber-950 font-extrabold text-xs">
-            <Shield class="w-4 h-4 text-amber-800" />
-            <span>CompTIA Security+ • Domain 1.0</span>
+      <div className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-3xl p-6 sm:p-8 text-amber-950 shadow-lg shadow-amber-200/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-2 max-w-2xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 text-amber-950 font-extrabold text-xs">
+            <Shield className="w-4 h-4 text-amber-900" />
+            <span>CompTIA Security+ SY0-701 • Domain 1.0</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-950">
             1.0 - General Security Concepts
           </h1>
-          <p class="text-amber-900/90 font-medium text-sm sm:text-base leading-relaxed">
-            Welcome to the foundations! Here we turn abstract security rules into simple, interactive physical toys you can click and test.
+          <p className="text-amber-900/90 font-semibold text-sm sm:text-base leading-relaxed">
+            Master general security concepts through <strong>Interactive PBQ Lab Simulations</strong>, <strong>CompTIA Scenario Practice Tests</strong>, and an <strong>Acronym Flashcard Dictionary</strong>!
           </p>
         </div>
 
-        <div class="bg-white/90 backdrop-blur-md rounded-2xl p-4 border-2 border-amber-200/60 shadow-sm shrink-0 flex items-center gap-3">
-          <div class="text-3xl">🧩</div>
-          <div>
-            <div class="text-xs font-bold text-amber-800 uppercase">Available Simulations</div>
-            <div class="text-lg font-extrabold text-amber-950">12 Active Simulation Modules!</div>
+        {/* Quick Stats Pill */}
+        <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 border-2 border-amber-200/60 shadow-sm shrink-0 flex items-center gap-4">
+          <div className="text-center border-r pr-3 border-amber-200">
+            <div className="text-xs font-black text-purple-700 uppercase">Simulations</div>
+            <div className="text-xl font-black text-purple-950">{simulations.length} Labs</div>
+          </div>
+          <div className="text-center border-r pr-3 border-amber-200">
+            <div className="text-xs font-black text-emerald-700 uppercase">Practice Tests</div>
+            <div className="text-xl font-black text-emerald-950">{mcqs.length} MCQs</div>
+          </div>
+          <div className="text-center">
+            <div className="text-xs font-black text-blue-700 uppercase">Acronyms</div>
+            <div className="text-xl font-black text-blue-950">{domain1Acronyms.length} Terms</div>
           </div>
         </div>
       </div>
 
-      {/* Topics Grid */}
-      <div class="space-y-4">
-        <h2 class="text-2xl font-extrabold text-slate-800 flex items-center gap-2">
-          <span>Select a Topic Simulation</span>
-          <Sparkles class="w-5 h-5 text-amber-500" />
-        </h2>
+      {/* Category Navigation Bar & Search */}
+      <div className="bg-white rounded-3xl p-4 border-2 border-slate-200 shadow-sm space-y-4">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+          
+          {/* Category Tabs */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => { sounds.playPop(); setActiveTab('all'); }}
+              className={`px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 ${
+                activeTab === 'all'
+                  ? 'bg-amber-500 text-amber-950 shadow-md shadow-amber-200'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>All Modules ({simulations.length + mcqs.length})</span>
+            </button>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <button
+              onClick={() => { sounds.playPop(); setActiveTab('simulations'); }}
+              className={`px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 ${
+                activeTab === 'simulations'
+                  ? 'bg-purple-600 text-white shadow-md shadow-purple-200'
+                  : 'bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200'
+              }`}
+            >
+              <Gamepad2 className="w-4 h-4 text-purple-600" />
+              <span>🎮 PBQ Simulations ({simulations.length})</span>
+            </button>
 
-          {/* ACTIVE EXAM MODULE: 1.1 - Security Controls */}
-          <div 
-            onClick={handleSelectSecurityControls}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🛡️
-              </div>
+            <button
+              onClick={() => { sounds.playPop(); setActiveTab('mcqs'); }}
+              className={`px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 ${
+                activeTab === 'mcqs'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200'
+                  : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 text-emerald-600" />
+              <span>📝 Practice Exam Tests ({mcqs.length})</span>
+            </button>
 
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.1</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.1 - Security Controls
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Control Categories</strong> (Technical, Operational, Managerial, Physical) and <strong>Control Types</strong> (Preventive, Deterrent, Detective, Corrective, Compensating, Directive)!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Technical / Operational</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Managerial / Physical</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Preventive & Deterrent</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Detective & Corrective</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Compensating & Directive</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Security Controls Test 🛡️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
+            <button
+              onClick={() => { sounds.playPop(); setActiveTab('acronyms'); }}
+              className={`px-4 py-2.5 rounded-2xl font-extrabold text-xs sm:text-sm transition-all flex items-center gap-2 active:scale-95 ${
+                activeTab === 'acronyms'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-200'
+                  : 'bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200'
+              }`}
+            >
+              <Tag className="w-4 h-4 text-blue-600" />
+              <span>🏷️ Acronym Dictionary ({domain1Acronyms.length})</span>
+            </button>
           </div>
 
-          {/* ACTIVE SIMULATION: 1.2 - The CIA & AIC Triad Simulation */}
-          <div 
-            onClick={handleSelectCia}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🧩
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2 • Simulation</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  CIA & AIC Triad Interactive Toy
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Interactive visual playground for Confidentiality, Integrity, Availability, and the ER-focused AIC Triad.
-              </p>
-
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Interactive Simulation</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Interactive Toy 🧩</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">Interactive</span>
-            </div>
+          {/* Quick Search Bar */}
+          <div className="relative shrink-0 md:w-64">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search topic or acronym..."
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border-2 border-slate-200 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:border-amber-400 transition-colors"
+            />
           </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - The CIA Triad MCQs */}
-          <div 
-            onClick={handleSelectCiaTriadMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔐
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - The CIA Triad
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Confidentiality</strong> (Encryption & MFA), <strong>Integrity</strong> (Hashing & Digital Signatures), <strong>Availability</strong> (Redundancy & Fault Tolerance), <strong>Non-repudiation</strong>, and the <strong>AIC Triad</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Confidentiality & Encryption</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Integrity & Hashing</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Availability & Redundancy</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Non-repudiation & Signatures</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">AIC Triad Prioritization</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start CIA Triad Test 🔐</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - Non-repudiation */}
-          <div 
-            onClick={handleSelectNonRepudiationMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                ✍️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - Non-repudiation
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Proof of Origin</strong>, <strong>Proof of Integrity</strong>, <strong>Digital Signature Creation</strong> (Private Key) & <strong>Verification</strong> (Public Key), and <strong>Avalanche Effect</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Proof of Origin & Integrity</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Sign with Private Key</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Verify with Public Key</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Avalanche Effect Hashing</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Triple Security Guarantee</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Non-repudiation Test ✍️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - AAA Framework */}
-          <div 
-            onClick={handleSelectAaaFrameworkMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🗝️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - AAA Framework
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Identification</strong>, <strong>Authentication</strong>, <strong>Authorization</strong>, <strong>Accounting</strong>, <strong>Certificate Authentication for Headless Systems</strong>, and <strong>Authorization Models</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Identification (Username)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Authentication (Password/MFA)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Authorization Models & Roles</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Accounting & Audit Logs</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Headless Device CA Certs</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start AAA Framework Test 🗝️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - Gap Analysis */}
-          <div 
-            onClick={handleSelectGapAnalysisMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📊
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - Gap Analysis
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Baseline Frameworks</strong> (NIST SP 800-171, ISO 27001), <strong>Evaluating People & Processes</strong>, <strong>Compliance Heatmaps</strong>, and <strong>Gap Analysis Reports</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">NIST SP 800-171 / ISO 27001</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Evaluate People & Processes</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Compare Current vs Goal</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Compliance Heatmaps & Matrix</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Gap Analysis Report Roadmap</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Gap Analysis Test 📊</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - Zero Trust */}
-          <div 
-            onClick={handleSelectZeroTrustMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🛡️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - Zero Trust
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>'Never Trust, Always Verify'</strong>, <strong>Data Plane vs Control Plane</strong>, <strong>PDP (Policy Engine & Administrator)</strong>, <strong>PEP (Policy Enforcement Point)</strong>, and <strong>Adaptive Identity</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Never Trust, Always Verify</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Data Plane vs Control Plane</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Policy Decision Point (PDP)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Policy Enforcement Point (PEP)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Adaptive Identity & Risk Signals</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Zero Trust Test 🛡️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - Physical Security */}
-          <div 
-            onClick={handleSelectPhysicalSecurityMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🏢
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - Physical Security
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Bollards & Barricades</strong>, <strong>Access Control Vestibules (Mantraps)</strong>, <strong>Two-Person Integrity</strong>, <strong>CCTV Analytics</strong>, <strong>Perimeter Lighting</strong>, and <strong>Sensors (Infrared/Pressure/Microwave/Ultrasonic)</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Bollards & Vehicle Barriers</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Access Control Vestibules (Mantraps)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Two-Person Integrity</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">CCTV Video Analytics</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Infrared / Pressure / Ultrasonic Sensors</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Physical Security Test 🏢</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.2 - Deception and Disruption */}
-          <div 
-            onClick={handleSelectDeceptionDisruptionMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🍯
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.2 - Deception and Disruption
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Honeypots</strong>, <strong>Honeynets</strong>, <strong>Honeyfiles</strong>, <strong>Honeytokens</strong> (API credentials, fake emails, database records), and <strong>TTP Reconnaissance</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Honeypots & Decoy Servers</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Honeynets & Decoy Networks</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Honeyfiles (Virtual Bear Traps)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Honeytoken API Keys & Emails</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">TTP Reconnaissance Intelligence</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Deception & Disruption Test 🍯</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.3 - Change Management */}
-          <div 
-            onClick={handleSelectChangeManagementMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔄
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.3</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.3 - Change Management
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Change Approval Process (CAB)</strong>, <strong>Backout Plans</strong>, <strong>Sandbox Testing</strong>, <strong>Maintenance Windows & Freezes</strong>, and <strong>Impact Analysis</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Change Advisory Board (CAB)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Backout Plan & Rollback</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Sandbox Testing Environment</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Maintenance Windows & Freezes</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Impact & Risk Analysis</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Change Management Test 🔄</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.3 - Technical Change Management */}
-          <div 
-            onClick={handleSelectTechnicalChangeManagementMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                ⚙️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.3</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.3 - Technical Change Management
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Allow Lists vs Deny Lists</strong>, <strong>HA Downtime Failover</strong>, <strong>Scope Control</strong>, <strong>System Dependencies</strong>, <strong>Configuration Version Control</strong>, and <strong>Diagram Documentation</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Allow List vs Deny List</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">HA Failover & Zero Downtime</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Scope Control</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Library & Cross-System Dependencies</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Config Version Control & Diagrams</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Technical Change Test ⚙️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Public Key Infrastructure */}
-          <div 
-            onClick={handleSelectPkiMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔑
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Public Key Infrastructure
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Asymmetric vs Symmetric Encryption</strong>, <strong>Public & Private Keys</strong>, <strong>Certificate Authorities (CA)</strong>, <strong>Key Escrow</strong>, and <strong>Hybrid Encryption</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Asymmetric Key Pairs</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Encrypt (Public) / Decrypt (Private)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Certificate Authority (CA) & PKI</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Key Escrow & Recovery</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Hybrid Symmetric/Asymmetric Protocols</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start PKI Practice Test 🔑</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Encrypting Data */}
-          <div 
-            onClick={handleSelectEncryptingDataMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔐
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Encrypting Data
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Data at Rest (BitLocker/FileVault)</strong>, <strong>Database Column Encryption</strong>, <strong>IPsec VPNs</strong>, <strong>Key Lengths</strong>, <strong>Key Stretching (PBKDF2)</strong>, and <strong>Kerckhoffs's Principle</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Data at Rest (Full-Disk Encryption)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Column & Database Encryption</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Data in Transit (IPsec / HTTPS)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Symmetric vs Asymmetric Key Lengths</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Key Stretching & Kerckhoffs's Principle</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Encrypting Data Test 🔐</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Key Exchange */}
-          <div 
-            onClick={handleSelectKeyExchangeMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔄
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Key Exchange
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Out-of-Band vs In-Band Key Exchange</strong>, <strong>Diffie-Hellman (DH) Key Agreement</strong>, <strong>Ephemeral Keys</strong>, and <strong>Perfect Forward Secrecy (PFS)</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Out-of-Band vs In-Band Exchange</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Diffie-Hellman Key Agreement</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Bob (Priv) + Alice (Pub) = Shared Key</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Ephemeral Session Keys</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Perfect Forward Secrecy (PFS)</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Key Exchange Test 🔄</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Encryption Technologies */}
-          <div 
-            onClick={handleSelectEncryptionTechnologiesMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                💻
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Encryption Technologies
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Trusted Platform Module (TPM)</strong>, <strong>Hardware Security Module (HSM)</strong>, <strong>Key Management Systems (KMS)</strong>, and <strong>Secure Enclaves</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Trusted Platform Module (TPM)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Hardware Security Module (HSM)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Key Management System (KMS)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Secure Enclave (ARM / Apple)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Key Separation from Stored Data</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Encryption Technologies Test 💻</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Obfuscation */}
-          <div 
-            onClick={handleSelectObfuscationMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🙈
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Obfuscation
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Steganography (Image LSB, Audio, Printer Watermarks)</strong>, <strong>Tokenization (NFC Mobile Payments)</strong>, <strong>Data Masking</strong>, and <strong>Code Obfuscation</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Steganography & Covertext</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Tokenization vs Encryption</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Token Service Vault</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Data Masking (PII Protection)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Printer Watermark & Code Obfuscation</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Obfuscation Test 🙈</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Hashing and Digital Signatures */}
-          <div 
-            onClick={handleSelectHashingSignaturesMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔏
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Hashing and Digital Signatures
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Hashes (SHA-256)</strong>, <strong>Hash Collisions (MD5)</strong>, <strong>Salting Hashes (defeating Rainbow Tables)</strong>, and <strong>Digital Signatures (Sign with Private, Verify with Public)</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">One-Way Message Digest (Integrity)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Hash Collisions (MD5 Weakness)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Salting Hashes (Anti-Rainbow Table)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Digital Signatures (Sign: Priv / Verify: Pub)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Integrity, Authentication & Non-repudiation</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Hashing & Signatures Test 🔏</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Blockchain Technology */}
-          <div 
-            onClick={handleSelectBlockchainTechnologyMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                ⛓️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Blockchain Technology
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Distributed Ledgers</strong>, <strong>Cryptographic Block Chaining (Hashes)</strong>, <strong>Immutability</strong>, <strong>Consensus Mechanisms</strong>, and <strong>Supply Chain Applications</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Decentralized P2P Ledger</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Cryptographic Block Chaining</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Tamper Resistance & Immutability</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Consensus Validation Mechanisms</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Supply Chain & Digital Identity</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Blockchain Test ⛓️</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE EXAM MODULE: 1.4 - Certificates */}
-          <div 
-            onClick={handleSelectCertificatesMcq}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📜
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  1.4 - Certificates
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Practice CompTIA Security+ scenario questions on <strong>Certificate Signing Requests (CSR)</strong>, <strong>Certificate Authorities (CA)</strong>, <strong>Wildcard Certificates</strong>, <strong>CRL</strong>, <strong>OCSP & OCSP Stapling</strong>, and <strong>Private CAs</strong>!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">CSR & X.509 Certificates</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Root of Trust & CA Chain</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Wildcard (*.domain.com)</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">CRL & OCSP Revocation</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">OCSP Stapling & Private CA</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Start Certificates Test 📜</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.4 - Hashing & Digital Signatures */}
-          <div 
-            onClick={handleSelectHashing}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="absolute top-4 right-4">
-              <span class="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-extrabold text-xs shadow-sm">
-                🌟 New Simulation!
-              </span>
-            </div>
-
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🧬
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  Hashing & Digital Signatures
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Learn one-way digital fingerprints and test why <strong>MD5 (Message Digest 5)</strong> is deprecated due to collision vulnerabilities!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">MD5</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Collisions</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Hash Blender & MD5 Lab</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">1 Acronym</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.4 - Obfuscation */}
-          <div 
-            onClick={handleSelectObfuscation}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🎨
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  Obfuscation & Data Masking
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Mask sensitive <strong>PII</strong> & <strong>SSN</strong> data for customer support, and embed hidden messages inside <strong>TCP</strong> steganography packets!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">PII</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">SSN</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">TCP</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Obfuscation Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">3 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.3 & 1.4 - Change Management & PKI */}
-          <div 
-            onClick={handleSelectChangePki}
-            class="group bg-white rounded-3xl p-6 border-4 border-blue-400 shadow-md hover:shadow-xl hover:border-blue-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📋
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Section 1.3 & 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Change Management & PKI Key Exchange
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Learn IT change pipelines with CEO visibility, and how PKI asymmetric key exchange delivers fast symmetric session keys!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">CEO</span>
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">IT</span>
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">PKI</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-blue-100 flex items-center justify-between text-blue-700 font-extrabold text-base group-hover:text-blue-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Change & PKI Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-blue-100 rounded-full font-bold">3 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.2 - Deception and Disruption */}
-          <div 
-            onClick={handleSelectDeception}
-            class="group bg-white rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🍯
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  Deception and Disruption
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Trap intruders with fake Honeypot servers, honeyfiles, and decoy <strong>API (Application Programming Interface)</strong> credentials!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">API</span>
-                <span class="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">Honeypots</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Honeypot & API Trap Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">Decoy Toys</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.2 - Physical Security */}
-          <div 
-            onClick={handleSelectPhysicalSec}
-            class="group bg-white rounded-3xl p-6 border-4 border-purple-400 shadow-md hover:shadow-xl hover:border-purple-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📹
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-purple-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-purple-600 transition-colors">
-                  Physical Security & Surveillance
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Protect physical perimeters day and night! Covers Closed-Circuit Television (<strong>CCTV</strong>) & Infrared Night Vision (<strong>IR</strong>).
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-900 rounded text-xs font-bold">CCTV</span>
-                <span class="px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-900 rounded text-xs font-bold">IR</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-purple-100 flex items-center justify-between text-purple-700 font-extrabold text-base group-hover:text-purple-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-purple-600 group-hover:scale-110 transition-transform" />
-                <span>Launch CCTV & IR Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-purple-100 rounded-full font-bold">2 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.2 - Gap Analysis */}
-          <div 
-            onClick={handleSelectGapAnalysis}
-            class="group bg-white rounded-3xl p-6 border-4 border-blue-400 shadow-md hover:shadow-xl hover:border-blue-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📏
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  Gap Analysis & Frameworks
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Find missing security controls! Compare your posture against NIST SP 800-171 and ISO/IEC 27001 standards to remediate security gaps.
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">NIST</span>
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">ISO</span>
-                <span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-900 rounded text-xs font-bold">IEC</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-blue-100 flex items-center justify-between text-blue-700 font-extrabold text-base group-hover:text-blue-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Gap Audit Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-blue-100 rounded-full font-bold">3 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.2 - AAA Framework */}
-          <div 
-            onClick={handleSelectAaa}
-            class="group bg-white rounded-3xl p-6 border-4 border-indigo-400 shadow-md hover:shadow-xl hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🪪
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                  AAA Framework & Access Control
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                The 3 A's of identity management: Authentication (ID Check), Authorization (Permissions), & Accounting (Audit Trail). Plus CA & VPN!
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">AAA</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">CA</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">VPN</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-indigo-100 flex items-center justify-between text-indigo-700 font-extrabold text-base group-hover:text-indigo-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-indigo-600 group-hover:scale-110 transition-transform" />
-                <span>Launch AAA Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-indigo-100 rounded-full font-bold">3 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.2 - Zero Trust Architecture */}
-          <div 
-            onClick={handleSelectZeroTrust}
-            class="group bg-white rounded-3xl p-6 border-4 border-yellow-400 shadow-md hover:shadow-xl hover:border-yellow-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-yellow-100 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🏰
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Section 1.2</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                  Zero Trust Architecture
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                "Never Trust, Always Verify!" Explore PEP Bouncers, PDP Brains (PE Engine & PA Administrator), IP, NAT, VPN, & IT attributes.
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">PEP</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">PDP</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">PE</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">PA</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">IP</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">NAT</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">VPN</span>
-                <span class="px-2 py-0.5 bg-yellow-50 border border-yellow-200 text-amber-950 rounded text-xs font-bold">IT</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-yellow-100 flex items-center justify-between text-amber-700 font-extrabold text-base group-hover:text-amber-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Zero Trust Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-yellow-100 rounded-full font-bold">8 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.4 - Encrypting Data */}
-          <div 
-            onClick={handleSelectEncryptingData}
-            class="group bg-white rounded-3xl p-6 border-4 border-sky-400 shadow-md hover:shadow-xl hover:border-sky-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🔒
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-sky-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors">
-                  Encrypting Data (Rest & Transit)
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Protect data sleeping in storage vs data moving on networks! Covers 8 acronyms: SSD, USB, EFS, HTTPS, VPN, SSL, TLS, & IPsec.
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">SSD</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">USB</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">EFS</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">HTTPS</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">VPN</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">SSL</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">TLS</span>
-                <span class="px-2 py-0.5 bg-sky-50 border border-sky-200 text-sky-900 rounded text-xs font-bold">IPsec</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-sky-100 flex items-center justify-between text-sky-700 font-extrabold text-base group-hover:text-sky-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-sky-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Rest vs. Transit Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-sky-100 rounded-full font-bold">8 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.4 - Certificates & PKI */}
-          <div 
-            onClick={handleSelectCertificates}
-            class="group bg-white rounded-3xl p-6 border-4 border-indigo-400 shadow-md hover:shadow-xl hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                📜
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                  Digital Certificates & PKI
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Explore the Web's Digital Passport Factory! Covers 14 key acronyms: PKI, CA, CSR, X.509, SAN, HSM, OS, DNS, CVE, CRL, OCSP, HTTP, SSL, & TLS.
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">PKI</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">CA</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">CSR</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">X.509</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">SAN</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">CRL</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">OCSP</span>
-                <span class="px-2 py-0.5 bg-indigo-50 border border-indigo-200 text-indigo-900 rounded text-xs font-bold">+ 6 More</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-indigo-100 flex items-center justify-between text-indigo-700 font-extrabold text-base group-hover:text-indigo-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-indigo-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Certificate Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-indigo-100 rounded-full font-bold">14 Acronyms</span>
-            </div>
-          </div>
-
-          {/* ACTIVE SIMULATION: 1.4 - Encryption Technologies */}
-          <div 
-            onClick={handleSelectEncryptionTech}
-            class="group bg-white rounded-3xl p-6 border-4 border-emerald-400 shadow-md hover:shadow-xl hover:border-emerald-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
-          >
-            <div class="space-y-4">
-              <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
-                🛡️
-              </div>
-
-              <div>
-                <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Section 1.4</span>
-                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                  Encryption Technologies
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-sm leading-relaxed">
-                Discover Hardware Security Vaults & CPU Offloading! Covers 8 acronyms: TPM, HSM, CPU, AES, SSL, TLS, SSH, & ROM.
-              </p>
-
-              {/* Acronym Badges */}
-              <div class="flex flex-wrap gap-1.5 pt-1">
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">TPM</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">HSM</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">CPU</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">AES</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">SSL</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">TLS</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">SSH</span>
-                <span class="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded text-xs font-bold">ROM</span>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-emerald-100 flex items-center justify-between text-emerald-700 font-extrabold text-base group-hover:text-emerald-900">
-              <div class="flex items-center gap-2">
-                <PlayCircle class="w-5 h-5 text-emerald-600 group-hover:scale-110 transition-transform" />
-                <span>Launch Hardware Security Playground</span>
-              </div>
-              <span class="text-xs px-2.5 py-1 bg-emerald-100 rounded-full font-bold">8 Acronyms</span>
-            </div>
-          </div>
-
         </div>
       </div>
+
+      {/* VIEW SECTION 1: INTERACTIVE PBQ SIMULATIONS */}
+      {(activeTab === 'all' || activeTab === 'simulations') && filteredSimulations.length > 0 && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-purple-100 pb-3">
+            <h2 className="text-2xl font-black text-purple-950 flex items-center gap-2">
+              <span className="p-2 rounded-xl bg-purple-100 text-purple-700">🎮</span>
+              <span>Interactive PBQ Lab Simulations</span>
+              <span className="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full font-extrabold">Hands-On Practice</span>
+            </h2>
+            <span className="text-xs font-extrabold text-purple-700">{filteredSimulations.length} Active Labs</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredSimulations.map((sim, idx) => (
+              <div 
+                key={idx}
+                onClick={sim.action}
+                className="group bg-gradient-to-br from-white via-purple-50/20 to-purple-100/30 rounded-3xl p-6 border-4 border-purple-400 shadow-md hover:shadow-xl hover:border-purple-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+              >
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 rounded-full bg-purple-600 text-white font-extrabold text-[11px] shadow-sm flex items-center gap-1">
+                    🎮 Interactive PBQ
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                    {sim.icon}
+                  </div>
+
+                  <div>
+                    <span className="text-xs font-extrabold text-purple-600 uppercase tracking-wider">{sim.section}</span>
+                    <h3 className="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">
+                      {sim.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
+                    {sim.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {sim.badges.map((b, bIdx) => (
+                      <span key={bIdx} className="px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-900 rounded text-xs font-bold">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-purple-100 flex items-center justify-between text-purple-700 font-extrabold text-sm group-hover:text-purple-950">
+                  <div className="flex items-center gap-2">
+                    <PlayCircle className="w-5 h-5 text-purple-600 group-hover:scale-110 transition-transform" />
+                    <span>Launch Hands-On PBQ 🚀</span>
+                  </div>
+                  <span className="text-xs px-2.5 py-1 bg-purple-100 rounded-full font-bold">Interactive Lab</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* VIEW SECTION 2: COMPTIA PRACTICE TESTS (MCQS) */}
+      {(activeTab === 'all' || activeTab === 'mcqs') && filteredMcqs.length > 0 && (
+        <div className="space-y-4 pt-4">
+          <div className="flex items-center justify-between border-b-2 border-emerald-100 pb-3">
+            <h2 className="text-2xl font-black text-emerald-950 flex items-center gap-2">
+              <span className="p-2 rounded-xl bg-emerald-100 text-emerald-700">📝</span>
+              <span>CompTIA Scenario Practice Tests (MCQs)</span>
+              <span className="text-xs px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full font-extrabold">Exam Questions & Layman Explanations</span>
+            </h2>
+            <span className="text-xs font-extrabold text-emerald-700">{filteredMcqs.length} Practice Tests</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredMcqs.map((mcq, idx) => (
+              <div 
+                key={idx}
+                onClick={mcq.action}
+                className="group bg-gradient-to-br from-white via-emerald-50/20 to-amber-50/30 rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+              >
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-extrabold text-[11px] shadow-sm">
+                    📝 Practice Exam Test
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                    {mcq.icon}
+                  </div>
+
+                  <div>
+                    <span className="text-xs font-extrabold text-amber-600 uppercase tracking-wider">{mcq.section}</span>
+                    <h3 className="text-xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                      {mcq.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
+                    {mcq.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {mcq.badges.map((b, bIdx) => (
+                      <span key={bIdx} className="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-900 rounded text-xs font-bold">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-amber-100 flex items-center justify-between text-amber-700 font-extrabold text-sm group-hover:text-amber-900">
+                  <div className="flex items-center gap-2">
+                    <PlayCircle className="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                    <span>Start Practice Test 🎲</span>
+                  </div>
+                  <span className="text-xs px-2.5 py-1 bg-amber-100 rounded-full font-bold">6 Scenarios</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* VIEW SECTION 3: ACRONYM FLASHCARD DICTIONARY */}
+      {(activeTab === 'all' || activeTab === 'acronyms') && (
+        <div className="space-y-4 pt-4">
+          <div className="flex items-center justify-between border-b-2 border-blue-100 pb-3">
+            <h2 className="text-2xl font-black text-blue-950 flex items-center gap-2">
+              <span className="p-2 rounded-xl bg-blue-100 text-blue-700">🏷️</span>
+              <span>Domain 1.0 Acronym Flashcard Dictionary</span>
+              <span className="text-xs px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full font-extrabold">Instant Memory Review</span>
+            </h2>
+            <span className="text-xs font-extrabold text-blue-700">{filteredAcronyms.length} Terms</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredAcronyms.map((acronym, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-4 border-2 border-blue-200 shadow-sm hover:border-blue-400 transition-all space-y-2">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                  <span className="px-2.5 py-1 bg-blue-600 text-white rounded-xl font-black text-sm">{acronym.term}</span>
+                  <span className="text-xs font-extrabold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">Sec {acronym.section}</span>
+                </div>
+                <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm">{acronym.name}</h4>
+                <p className="text-slate-600 text-xs leading-normal font-medium">{acronym.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
     </div>
   );
