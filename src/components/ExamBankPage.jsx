@@ -82,10 +82,10 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
       id: 'domain5_dumps_batch9',
       title: 'Batch 9: Questions 161 - 180',
       subtitle: 'Disaster Recovery Phases, DPO Requirements, Asset Replacement Costs, Incident Playbooks, Risk Reporting',
-      status: 'pending',
+      status: 'active',
       count: 20,
-      verified: false,
-      tags: ['Upcoming Batch']
+      verified: true,
+      tags: ['Q161-Q180 Verified', 'Option Shuffling', 'Layman Explanations', 'Distractor Breakdown']
     },
     {
       id: 'domain5_dumps_batch10',
@@ -151,13 +151,13 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 shadow-sm shrink-0 space-y-2 min-w-[240px]">
           <div className="flex items-center justify-between text-xs font-bold text-purple-200">
             <span>Overall Bank Progress</span>
-            <span className="text-amber-300 font-black">160 / 227 Questions</span>
+            <span className="text-amber-300 font-black">180 / 227 Questions</span>
           </div>
           <div className="w-full bg-black/30 h-3 rounded-full overflow-hidden p-0.5 border border-white/20">
-            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[70%]" />
+            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[79%]" />
           </div>
           <div className="text-[11px] text-purple-200 font-medium text-center pt-1">
-            Batches 1 - 8 Active • 67 Questions Pending
+            Batches 1 - 9 Active • 47 Questions Pending
           </div>
         </div>
       </div>
