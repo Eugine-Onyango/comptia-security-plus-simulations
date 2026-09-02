@@ -46,10 +46,10 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
       id: 'domain5_dumps_batch5',
       title: 'Batch 5: Questions 81 - 100',
       subtitle: 'Continuous Risk Assessment, Single Loss Expectancy (SLE), MTBF Hard Drive Metrics, Anomalous Behavior',
-      status: 'pending',
+      status: 'active',
       count: 20,
-      verified: false,
-      tags: ['Upcoming Batch']
+      verified: true,
+      tags: ['Q81-Q100 Verified', 'Option Shuffling', 'Layman Explanations', 'Distractor Breakdown']
     },
     {
       id: 'domain5_dumps_batch6',
@@ -151,13 +151,13 @@ export default function ExamBankPage({ onBack, onSelectBatch }) {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 shadow-sm shrink-0 space-y-2 min-w-[240px]">
           <div className="flex items-center justify-between text-xs font-bold text-purple-200">
             <span>Overall Bank Progress</span>
-            <span className="text-amber-300 font-black">80 / 227 Questions</span>
+            <span className="text-amber-300 font-black">100 / 227 Questions</span>
           </div>
           <div className="w-full bg-black/30 h-3 rounded-full overflow-hidden p-0.5 border border-white/20">
-            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[35%]" />
+            <div className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full rounded-full w-[44%]" />
           </div>
           <div className="text-[11px] text-purple-200 font-medium text-center pt-1">
-            Batches 1 - 4 Active • 147 Questions Pending
+            Batches 1 - 5 Active • 127 Questions Pending
           </div>
         </div>
       </div>
