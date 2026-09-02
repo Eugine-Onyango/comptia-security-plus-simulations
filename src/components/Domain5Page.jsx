@@ -63,6 +63,11 @@ export default function Domain5Page({ onBack, onSelectTopic }) {
     onSelectTopic('user_training');
   };
 
+  const handleSelectDomain5DumpsBatch1 = () => {
+    sounds.playSuccess();
+    onSelectTopic('domain5_dumps_batch1');
+  };
+
   return (
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
       
@@ -109,6 +114,52 @@ export default function Domain5Page({ onBack, onSelectTopic }) {
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* FEATURED DUMP BANK: Domain 5.0 Practice Bank (Questions 1 - 20) */}
+          <div 
+            onClick={handleSelectDomain5DumpsBatch1}
+            class="group bg-gradient-to-br from-white via-purple-50 to-indigo-50/50 rounded-3xl p-6 border-4 border-amber-400 shadow-lg hover:shadow-2xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="absolute top-4 right-4">
+              <span class="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-extrabold text-xs shadow-sm flex items-center gap-1">
+                🌟 Official Exam Dump Vault (227 Questions Total)
+              </span>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                  📜
+                </div>
+                <div>
+                  <span class="text-xs font-extrabold text-amber-700 uppercase tracking-wider">Domain 5.0 Exam Vault • Batch 1</span>
+                  <h3 class="text-2xl font-black text-slate-900 group-hover:text-amber-600 transition-colors">
+                    Domain 5.0 Security Program Management Practice (Q1 - Q20)
+                  </h3>
+                </div>
+              </div>
+
+              <p class="text-slate-700 text-sm leading-relaxed font-medium">
+                Verified CompTIA Security+ SY0-701 exam questions covering <strong>KRIs</strong>, <strong>RTO vs RPO</strong>, <strong>Acceptable Use Policies (AUP)</strong>, <strong>Passive Reconnaissance</strong>, <strong>Data Subject / Controller / Processor Roles</strong>, <strong>Qualitative vs Quantitative Risk</strong>, <strong>Governance Boards</strong>, and <strong>SOC 2 Audit Rights</strong>!
+              </p>
+
+              {/* Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-950 rounded-lg text-xs font-bold border border-amber-300">Q1 - Q20 Verified</span>
+                <span class="px-2.5 py-1 bg-purple-100 text-purple-950 rounded-lg text-xs font-bold border border-purple-300">Shuffled Options (A, B, C, D)</span>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-950 rounded-lg text-xs font-bold border border-emerald-300">Layman Explanations & Distractor Analysis</span>
+                <span class="px-2.5 py-1 bg-blue-100 text-blue-950 rounded-lg text-xs font-bold border border-blue-300">Instant Audio Feedback</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-200 flex items-center justify-between text-amber-900 font-extrabold text-base group-hover:text-amber-950">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-6 h-6 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Start Batch 1 Test (Questions 1 - 20) 🎲</span>
+              </div>
+              <span class="text-xs px-3 py-1 bg-amber-500 text-amber-950 rounded-full font-black">20 Scenarios</span>
+            </div>
+          </div>
 
           {/* ACTIVE SIMULATION: 5.1 - Security Policies */}
           <div 

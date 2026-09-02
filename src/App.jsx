@@ -99,6 +99,7 @@ import IncidentResponseMcq from './components/questions/IncidentResponseMcq';
 import IncidentPlanningMcq from './components/questions/IncidentPlanningMcq';
 import DigitalForensicsMcq from './components/questions/DigitalForensicsMcq';
 import LogDataMcq from './components/questions/LogDataMcq';
+import Domain5DumpsBatch1Mcq from './components/questions/Domain5DumpsBatch1Mcq';
 import CloudInfrastructuresSim from './components/simulations/CloudInfrastructuresSim';
 import NetworkConceptsSim from './components/simulations/NetworkConceptsSim';
 import OtherInfraSim from './components/simulations/OtherInfraSim';
@@ -308,6 +309,7 @@ export default function App() {
               if (topicId === 'compliance') setCurrentView('compliance');
               if (topicId === 'privacy') setCurrentView('privacy');
               if (topicId === 'user_training') setCurrentView('user_training');
+              if (topicId === 'domain5_dumps_batch1') setCurrentView('domain5_dumps_batch1');
             }}
           />
         )}
@@ -1016,6 +1018,12 @@ export default function App() {
 
         {currentView === 'user_training' && (
           <UserTrainingSim
+            onBack={() => setCurrentView('domain5')}
+          />
+        )}
+
+        {currentView === 'domain5_dumps_batch1' && (
+          <Domain5DumpsBatch1Mcq
             onBack={() => setCurrentView('domain5')}
           />
         )}
