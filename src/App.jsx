@@ -136,6 +136,11 @@ import BiaSim from './components/simulations/BiaSim';
 import ComplianceSim from './components/simulations/ComplianceSim';
 import PrivacySim from './components/simulations/PrivacySim';
 import UserTrainingSim from './components/simulations/UserTrainingSim';
+import PortsHotelStudioSim from './components/simulations/PortsHotelStudioSim';
+import FirewallStudioSim from './components/simulations/FirewallStudioSim';
+import PacketInspectorStudioSim from './components/simulations/PacketInspectorStudioSim';
+import NmapStudioSim from './components/simulations/NmapStudioSim';
+import WiresharkOdysseyStudioSim from './components/simulations/WiresharkOdysseyStudioSim';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'domain1', 'domain2', 'domain3', 'domain4', 'domain5', ...
@@ -163,8 +168,33 @@ export default function App() {
               if (domainId === 'domain4') setCurrentView('domain4');
               if (domainId === 'domain5') setCurrentView('domain5');
               if (domainId === 'exam_bank') setCurrentView('exam_bank');
+              if (domainId === 'ports_sim') setCurrentView('ports_sim');
+              if (domainId === 'firewall_sim') setCurrentView('firewall_sim');
+              if (domainId === 'pcap_sim') setCurrentView('pcap_sim');
+              if (domainId === 'nmap_sim') setCurrentView('nmap_sim');
+              if (domainId === 'wireshark_odyssey') setCurrentView('wireshark_odyssey');
             }}
           />
+        )}
+
+        {currentView === 'ports_sim' && (
+          <PortsHotelStudioSim onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'firewall_sim' && (
+          <FirewallStudioSim onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'pcap_sim' && (
+          <PacketInspectorStudioSim onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'nmap_sim' && (
+          <NmapStudioSim onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'wireshark_odyssey' && (
+          <WiresharkOdysseyStudioSim onBack={() => setCurrentView('home')} />
         )}
 
         {currentView === 'exam_bank' && (
@@ -304,9 +334,11 @@ export default function App() {
               if (topicId === 'security_monitoring_mcq') setCurrentView('security_monitoring_mcq');
               if (topicId === 'security_tools_mcq') setCurrentView('security_tools_mcq');
               if (topicId === 'firewalls_mcq') setCurrentView('firewalls_mcq');
+              if (topicId === 'firewall_sim') setCurrentView('firewall_sim');
               if (topicId === 'web_filtering_mcq') setCurrentView('web_filtering_mcq');
               if (topicId === 'os_security_mcq') setCurrentView('os_security_mcq');
               if (topicId === 'secure_protocols_mcq') setCurrentView('secure_protocols_mcq');
+              if (topicId === 'ports_sim') setCurrentView('ports_sim');
               if (topicId === 'email_security_mcq') setCurrentView('email_security_mcq');
               if (topicId === 'endpoint_security_mcq') setCurrentView('endpoint_security_mcq');
               if (topicId === 'monitoring_data_mcq') setCurrentView('monitoring_data_mcq');
@@ -319,6 +351,8 @@ export default function App() {
               if (topicId === 'incident_response_mcq') setCurrentView('incident_response_mcq');
               if (topicId === 'incident_planning_mcq') setCurrentView('incident_planning_mcq');
               if (topicId === 'digital_forensics_mcq') setCurrentView('digital_forensics_mcq');
+              if (topicId === 'pcap_sim') setCurrentView('pcap_sim');
+              if (topicId === 'nmap_sim') setCurrentView('nmap_sim');
               if (topicId === 'log_data_mcq') setCurrentView('log_data_mcq');
             }}
           />

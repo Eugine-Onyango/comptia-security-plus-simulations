@@ -37,7 +37,62 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
         </button>
 
         {/* Navigation & Controls */}
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('ports_sim'); }}
+            class={`flex items-center gap-1.5 px-3.5 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'ports_sim'
+                ? 'bg-amber-500 border-amber-600 text-white shadow-amber-200'
+                : 'bg-amber-100 hover:bg-amber-200 border-amber-300 text-amber-950'
+            }`}
+          >
+            <span>🚪 Ports Hotel</span>
+          </button>
+
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('firewall_sim'); }}
+            class={`flex items-center gap-1.5 px-3.5 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'firewall_sim'
+                ? 'bg-indigo-600 border-indigo-700 text-white shadow-indigo-200'
+                : 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300 text-indigo-950'
+            }`}
+          >
+            <span>🛡️ Firewall & ACLs</span>
+          </button>
+
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('pcap_sim'); }}
+            class={`flex items-center gap-1.5 px-3.5 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'pcap_sim'
+                ? 'bg-sky-600 border-sky-700 text-white shadow-sky-200'
+                : 'bg-sky-100 hover:bg-sky-200 border-sky-300 text-sky-950'
+            }`}
+          >
+            <span>🔍 Packet Inspector</span>
+          </button>
+
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('nmap_sim'); }}
+            class={`flex items-center gap-1.5 px-3.5 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'nmap_sim'
+                ? 'bg-emerald-600 border-emerald-700 text-white shadow-emerald-200'
+                : 'bg-emerald-100 hover:bg-emerald-200 border-emerald-300 text-emerald-950'
+            }`}
+          >
+            <span>📡 Nmap Recon</span>
+          </button>
+
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('wireshark_odyssey'); }}
+            class={`flex items-center gap-1.5 px-3.5 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${
+              currentView === 'wireshark_odyssey'
+                ? 'bg-cyan-600 border-cyan-700 text-white shadow-cyan-200'
+                : 'bg-cyan-100 hover:bg-cyan-200 border-cyan-300 text-cyan-950'
+            }`}
+          >
+            <span>🦈 Wireshark Odyssey</span>
+          </button>
+
           <button
             onClick={() => { sounds.playPop(); setCurrentView('exam_bank'); }}
             class={`flex items-center gap-2 px-4 py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 ${

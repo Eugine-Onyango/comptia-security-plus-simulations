@@ -48,6 +48,11 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
     onSelectTopic('penetration_testing_mcq');
   };
 
+  const handleSelectNmapSim = () => {
+    sounds.playSuccess();
+    onSelectTopic('nmap_sim');
+  };
+
   const handleSelectPentestProcessDisclosure = () => {
     sounds.playSuccess();
     onSelectTopic('pentest_process_disclosure_mcq');
@@ -78,6 +83,11 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
     onSelectTopic('firewalls_mcq');
   };
 
+  const handleSelectFirewallSim = () => {
+    sounds.playSuccess();
+    onSelectTopic('firewall_sim');
+  };
+
   const handleSelectWebFiltering = () => {
     sounds.playSuccess();
     onSelectTopic('web_filtering_mcq');
@@ -91,6 +101,11 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
   const handleSelectSecureProtocols = () => {
     sounds.playSuccess();
     onSelectTopic('secure_protocols_mcq');
+  };
+
+  const handleSelectPortsHotelSim = () => {
+    sounds.playSuccess();
+    onSelectTopic('ports_sim');
   };
 
   const handleSelectEmailSecurity = () => {
@@ -156,6 +171,11 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
   const handleSelectLogData = () => {
     sounds.playSuccess();
     onSelectTopic('log_data_mcq');
+  };
+
+  const handleSelectPcapSim = () => {
+    sounds.playSuccess();
+    onSelectTopic('pcap_sim');
   };
 
   return (
@@ -525,6 +545,55 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
             </div>
           </div>
 
+          {/* FEATURED SIMULATION: 4.3 - The Nmap Radar & Network Recon Lab */}
+          <div 
+            onClick={handleSelectNmapSim}
+            class="group bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 text-white rounded-3xl p-6 border-4 border-emerald-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-emerald-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-emerald-300" />
+                  <span>Interactive Simulation • Domain 4.3 Reconnaissance Tools</span>
+                </div>
+                <span class="px-3 py-1 bg-emerald-400 text-emerald-950 font-black text-xs rounded-full shadow-sm">
+                  LIVE VISUAL SIMULATION 📡
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  📡
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-300 transition-colors">
+                    The Nmap Radar & Network Recon Lab 📡💻
+                  </h3>
+                  <p class="text-emerald-100 text-sm font-medium mt-1">
+                    Visualize the "Ding-Dong Ditch" Stealth SYN scan (<strong>-sS</strong>) vs Full TCP Connect scan (<strong>-sT</strong>), master port states (<strong>open, closed, filtered</strong>), test flags in the terminal sandbox, and solve CompTIA PBQ recon scenarios!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Stealth SYN (-sS) vs TCP Connect (-sT)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Open vs Closed vs Filtered State Simulator</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Interactive Line-by-Line Terminal Output Dissector</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">CompTIA PBQ Recon Master Challenge</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-emerald-400/40 flex items-center justify-between text-emerald-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-emerald-300 group-hover:scale-110 transition-transform" />
+                <span>Launch Nmap Radar & Recon Simulation Studio →</span>
+              </span>
+              <span class="px-3 py-1 bg-emerald-400 text-emerald-950 rounded-full font-black text-xs">
+                Open Studio 📡
+              </span>
+            </div>
+          </div>
+
           {/* ACTIVE EXAM MODULE: 4.3 - Penetration Testing */}
           <div 
             onClick={handleSelectPenetrationTesting}
@@ -765,6 +834,50 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
             </div>
           </div>
 
+          {/* ACTIVE SIMULATION: 4.5 - The Firewall Security Gate & ACL Studio */}
+          <div 
+            onClick={handleSelectFirewallSim}
+            class="group bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-6 border-4 border-indigo-400 shadow-md hover:shadow-xl hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-200 text-indigo-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                  🛡️
+                </div>
+                <span class="px-2.5 py-1 bg-indigo-200 text-indigo-950 font-black text-xs rounded-full">
+                  LIVE SIMULATION 🚧
+                </span>
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider">Interactive Studio</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  The Firewall Security Gate
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Experience the TCP 3-Way Handshake (<strong>SYN ➡️ SYN-ACK ➡️ ACK</strong>), test <strong>Stateful Inspection vs. Stateless Amnesia</strong>, see <strong>First Match Wins</strong> in action, and solve <strong>PBQ troubleshooting tickets</strong>!
+              </p>
+
+              {/* Topic Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-indigo-100 border border-indigo-300 text-indigo-900 rounded text-xs font-bold">SYN / SYN-ACK / ACK</span>
+                <span class="px-2 py-0.5 bg-indigo-100 border border-indigo-300 text-indigo-900 rounded text-xs font-bold">State Table vs Amnesia</span>
+                <span class="px-2 py-0.5 bg-indigo-100 border border-indigo-300 text-indigo-900 rounded text-xs font-bold">First Match Wins</span>
+                <span class="px-2 py-0.5 bg-indigo-100 border border-indigo-300 text-indigo-900 rounded text-xs font-bold">Implicit Deny Rule 99</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-indigo-200 flex items-center justify-between text-indigo-800 font-extrabold text-base group-hover:text-indigo-950">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-indigo-600 group-hover:scale-110 transition-transform" />
+                <span>Launch Firewall Studio 🛡️</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-indigo-200 rounded-full font-bold">3 Modes</span>
+            </div>
+          </div>
+
           {/* ACTIVE EXAM MODULE: 4.5 - Firewalls */}
           <div 
             onClick={handleSelectFirewalls}
@@ -882,6 +995,50 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
                 <span>Start OS Security Test 💻</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-blue-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE SIMULATION: 4.5 - The Port Hotel & Security Courier */}
+          <div 
+            onClick={handleSelectPortsHotelSim}
+            class="group bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-6 border-4 border-amber-400 shadow-md hover:shadow-xl hover:border-amber-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-14 h-14 rounded-2xl bg-amber-200 text-amber-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                  🚪
+                </div>
+                <span class="px-2.5 py-1 bg-amber-200 text-amber-950 font-black text-xs rounded-full">
+                  LIVE SIMULATION 🏨
+                </span>
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Interactive Studio</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  The Port Hotel & Courier
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Explore the 65,535-room hotel metaphor! Contrast <strong>Insecure vs. Armored Twins</strong>, watch the live courier run past the wiretap snooper, and test yourself in the <strong>Bouncer Challenge</strong>!
+              </p>
+
+              {/* Topic Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-amber-100 border border-amber-300 text-amber-900 rounded text-xs font-bold">HTTP 80 vs HTTPS 443</span>
+                <span class="px-2 py-0.5 bg-amber-100 border border-amber-300 text-amber-900 rounded text-xs font-bold">Telnet 23 vs SSH 22</span>
+                <span class="px-2 py-0.5 bg-amber-100 border border-amber-300 text-amber-900 rounded text-xs font-bold">FTP 21 vs SFTP 22</span>
+                <span class="px-2 py-0.5 bg-amber-100 border border-amber-300 text-amber-900 rounded text-xs font-bold">Bouncer Challenge 💂‍♂️</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-200 flex items-center justify-between text-amber-800 font-extrabold text-base group-hover:text-amber-950">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+                <span>Launch Port Hotel Studio 🚪</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-amber-200 rounded-full font-bold">3 Modes</span>
             </div>
           </div>
 
@@ -1408,6 +1565,50 @@ export default function Domain4Page({ onBack, onSelectTopic }) {
                 <span>Start Digital Forensics Test 🔬</span>
               </div>
               <span class="text-xs px-2.5 py-1 bg-rose-100 rounded-full font-bold">6 Scenarios</span>
+            </div>
+          </div>
+
+          {/* ACTIVE SIMULATION: 4.8 - The Packet Inspector & Wireshark Forensic Lab */}
+          <div 
+            onClick={handleSelectPcapSim}
+            class="group bg-gradient-to-br from-sky-50 to-indigo-50 rounded-3xl p-6 border-4 border-sky-400 shadow-md hover:shadow-xl hover:border-sky-500 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="w-14 h-14 rounded-2xl bg-sky-200 text-sky-800 flex items-center justify-center font-extrabold text-2xl group-hover:scale-110 transition-transform">
+                  📦
+                </div>
+                <span class="px-2.5 py-1 bg-sky-200 text-sky-950 font-black text-xs rounded-full">
+                  LIVE SIMULATION 🔬
+                </span>
+              </div>
+
+              <div>
+                <span class="text-xs font-extrabold text-sky-600 uppercase tracking-wider">Interactive Studio</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors">
+                  The Packet Inspector & Wireshark Lab
+                </h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Unwrap the 4-layer nesting doll of network headers (<strong>Ethernet MAC ➡️ IP ➡️ TCP/UDP ➡️ Payload</strong>), inspect packets in our live <strong>Wireshark Mini-Lab</strong>, compare <strong>NetFlow vs. PCAP</strong>, and solve <strong>Forensic Incident Cases</strong>!
+              </p>
+
+              {/* Topic Badges */}
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 text-sky-900 rounded text-xs font-bold">X-Ray Packet Unwrapper</span>
+                <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 text-sky-900 rounded text-xs font-bold">Wireshark Mini-Lab</span>
+                <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 text-sky-900 rounded text-xs font-bold">NetFlow vs PCAP</span>
+                <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 text-sky-900 rounded text-xs font-bold">Forensics PBQ Cases 🕵️‍♂️</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-sky-200 flex items-center justify-between text-sky-800 font-extrabold text-base group-hover:text-sky-950">
+              <div class="flex items-center gap-2">
+                <PlayCircle class="w-5 h-5 text-sky-600 group-hover:scale-110 transition-transform" />
+                <span>Launch Packet Inspector Studio 📦</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 bg-sky-200 rounded-full font-bold">3 Modes</span>
             </div>
           </div>
 

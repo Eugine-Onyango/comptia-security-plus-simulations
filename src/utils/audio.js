@@ -81,6 +81,10 @@ class SoundFX {
       console.log('Audio error:', e);
     }
   }
+
+  playAlert() {
+    this.playBuzzer();
+  }
 }
 
 export const sounds = new SoundFX();

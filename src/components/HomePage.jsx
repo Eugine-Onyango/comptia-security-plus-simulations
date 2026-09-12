@@ -128,6 +128,251 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: The Port Grand Hotel & Live Courier Simulation */}
+          <div 
+            onClick={() => handleSelect('ports_sim')}
+            class="group bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600 text-white rounded-3xl p-6 border-4 border-yellow-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-yellow-100 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-yellow-300" />
+                  <span>CompTIA Security+ SY0-701 Core Ports Master</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-orange-950 font-black text-xs rounded-full shadow-sm">
+                  LIVE INTERACTIVE STUDIO
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🚪
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-yellow-200 transition-colors">
+                    The Port Hotel & Security Courier Simulation 🏨🏃‍♂️
+                  </h3>
+                  <p class="text-amber-100 text-sm font-medium mt-1">
+                    Understand ports with the 65,535-room hotel metaphor! Watch the live courier walk the wire with your packets, contrast <strong>Cleartext vs. Encrypted Twins</strong> (HTTP :80 vs HTTPS :443, Telnet :23 vs SSH :22, FTP :21 vs SFTP :22), and play the <strong>Firewall Bouncer Exam Challenge</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">The Hotel Explorer (16 Key Sec+ Doors)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Live Wiretap Courier Animation</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Firewall Bouncer Mini-Game</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-400/50 flex items-center justify-between text-yellow-100 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-yellow-300 group-hover:translate-x-1 transition-transform" />
+                <span>Launch Ports Hotel Live Simulation Studio →</span>
+              </span>
+              <span class="px-3 py-1 bg-white text-amber-950 rounded-full font-black text-xs">
+                Launch Live Studio 🚪
+              </span>
+            </div>
+          </div>
+
+          {/* FEATURED: The Firewall Security Gate & ACL Studio */}
+          <div 
+            onClick={() => handleSelect('firewall_sim')}
+            class="group bg-gradient-to-br from-indigo-700 via-purple-700 to-slate-900 text-white rounded-3xl p-6 border-4 border-emerald-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-emerald-300 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-emerald-300" />
+                  <span>CompTIA Security+ SY0-701 Network Security Master</span>
+                </div>
+                <span class="px-3 py-1 bg-emerald-400 text-emerald-950 font-black text-xs rounded-full shadow-sm">
+                  NEW LIVE INTERACTIVE MODULE
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🛡️
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-300 transition-colors">
+                    The Firewall Security Gate & ACL Studio 🚧🏓
+                  </h3>
+                  <p class="text-indigo-100 text-sm font-medium mt-1">
+                    Master the TCP 3-Way Handshake (<strong>SYN ➡️ SYN-ACK ➡️ ACK</strong>), test <strong>Stateful vs Stateless State Tables</strong>, experiment in the <strong>Linux Firewall Sandbox (iptables, ufw, firewalld)</strong>, contrast <strong>Packet Filters vs. NGFW vs. WAF</strong>, and solve <strong>6 CompTIA PBQ troubleshooting tickets</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Handshake & State Table</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Linux iptables • ufw • firewalld</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Packet Filter vs NGFW vs WAF</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">6 CompTIA PBQ Scenarios (DMZ, NAT, Egress)</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-indigo-400/40 flex items-center justify-between text-emerald-300 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-emerald-300 group-hover:translate-x-1 transition-transform" />
+                <span>Launch Firewall & ACL Live Studio →</span>
+              </span>
+              <span class="px-3 py-1 bg-emerald-400 text-emerald-950 rounded-full font-black text-xs">
+                Launch Live Studio 🛡️
+              </span>
+            </div>
+          </div>
+
+          {/* FEATURED: The Packet Inspector & Wireshark Forensic Lab */}
+          <div 
+            onClick={() => handleSelect('pcap_sim')}
+            class="group bg-gradient-to-br from-sky-600 via-indigo-700 to-slate-900 text-white rounded-3xl p-6 border-4 border-sky-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-sky-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-sky-300" />
+                  <span>CompTIA Security+ SY0-701 Packet Analysis & Forensics</span>
+                </div>
+                <span class="px-3 py-1 bg-sky-300 text-sky-950 font-black text-xs rounded-full shadow-sm">
+                  LIVE INTERACTIVE MODULE
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  📦
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-sky-300 transition-colors">
+                    The Packet Inspector & Wireshark Forensic Lab 🔬🦈
+                  </h3>
+                  <p class="text-sky-100 text-sm font-medium mt-1">
+                    Unwrap the 4-layer Russian nesting doll of network headers (<strong>Ethernet MAC ➡️ IP ➡️ TCP/UDP ➡️ Payload</strong>), inspect packets in our live <strong>Wireshark Mini-Lab</strong>, compare <strong>NetFlow vs. Full PCAP</strong>, and solve <strong>Forensic Incident Cases</strong> (Cleartext passwords, ARP Poisoning, and DNS Tunneling)!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">The X-Ray Packet Unwrapper</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Wireshark Mini-Lab & Follow TCP Stream</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">NetFlow Phone Bill vs PCAP Wiretap</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Packet Detective PBQ Challenges</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-sky-400/40 flex items-center justify-between text-sky-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-sky-300 group-hover:translate-x-1 transition-transform" />
+                <span>Launch Packet Inspector & Wireshark Studio →</span>
+              </span>
+              <span class="px-3 py-1 bg-sky-300 text-sky-950 rounded-full font-black text-xs">
+                Launch Live Lab 🔬
+              </span>
+            </div>
+          </div>
+
+          {/* FEATURED: The Nmap Radar & Network Recon Lab */}
+          <div 
+            onClick={() => handleSelect('nmap_sim')}
+            class="group bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 text-white rounded-3xl p-6 border-4 border-emerald-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-emerald-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-emerald-300" />
+                  <span>CompTIA Security+ SY0-701 Domain 4.3 Network Reconnaissance</span>
+                </div>
+                <span class="px-3 py-1 bg-emerald-400 text-emerald-950 font-black text-xs rounded-full shadow-sm">
+                  NEW LIVE RECON MODULE
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  📡
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-300 transition-colors">
+                    The Nmap Radar & Network Recon Lab 📡💻
+                  </h3>
+                  <p class="text-emerald-100 text-sm font-medium mt-1">
+                    Demystify port scanning without the confusion! Watch the <strong>"Ding-Dong Ditch" Stealth SYN scan (-sS)</strong> vs <strong>Full Connect scan (-sT)</strong> in action, understand port states (<strong>open, closed, filtered</strong>), dissect terminal scan outputs line-by-line, and master <strong>CompTIA PBQ reconnaissance scenarios</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Ding-Dong Ditch (-sS) vs Full Connect (-sT) Animation</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Port States: Open vs Closed vs Filtered (Firewall)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Interactive Terminal Sandbox & Flag Dissector</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">CompTIA PBQ Recon Master Challenge</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-emerald-400/40 flex items-center justify-between text-emerald-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-emerald-300 group-hover:translate-x-1 transition-transform" />
+                <span>Launch Nmap Radar & Recon Live Studio →</span>
+              </span>
+              <span class="px-3 py-1 bg-emerald-400 text-emerald-950 rounded-full font-black text-xs">
+                Launch Recon Lab 📡
+              </span>
+            </div>
+          </div>
+
+          {/* FEATURED: Wireshark Packet Odyssey (Sprint-by-Sprint Field Lab) */}
+          <div 
+            onClick={() => handleSelect('wireshark_odyssey')}
+            class="group bg-gradient-to-br from-cyan-700 via-sky-800 to-indigo-900 text-white rounded-3xl p-6 border-4 border-cyan-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-cyan-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-cyan-300" />
+                  <span>Hands-On Field Lab • 6 Sprints Roadmap</span>
+                </div>
+                <span class="px-3 py-1 bg-cyan-400 text-slate-950 font-black text-xs rounded-full shadow-sm">
+                  SPRINT 0 READY: PREP & SAFETY ZONE
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🦈
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-cyan-300 transition-colors">
+                    Wireshark Packet Odyssey: Sprint-by-Sprint Field Lab 🦈🔍
+                  </h3>
+                  <p class="text-cyan-100 text-sm font-medium mt-1">
+                    Master network analysis without the confusion! Follow a proven 6-stage roadmap starting from <strong>Sprint 0: The Prep & Safety Zone</strong> (Safe Corner Sandbox, Non-Root Hardened Capture, and Hallway Door Detection), moving sequentially through X-Ray packet sniffing, cleartext vs. encryption, handshakes, and catching attackers!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Sprint 0: Sandbox & Privilege Hardening</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Sprint 1: X-Ray Packet Filters</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Sprint 2: Plaintext vs. Locked Box</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Sprint 3: TCP Handshakes & Scans</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Sprint 4: Attacker Analysis (ARP, DoS, DNS)</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-cyan-400/40 flex items-center justify-between text-cyan-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-cyan-300 group-hover:translate-x-1 transition-transform" />
+                <span>Enter Wireshark Packet Odyssey (Sprint 0) →</span>
+              </span>
+              <span class="px-3 py-1 bg-cyan-300 text-slate-950 rounded-full font-black text-xs">
+                Enter Sprint 0 🦈
+              </span>
+            </div>
+          </div>
+
           {/* Domain 1.0 Card */}
           <div
             onClick={() => handleSelect('domain1')}
