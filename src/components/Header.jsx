@@ -110,6 +110,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
           </button>
 
           <button
+            onClick={() => { sounds.playPop(); setCurrentView('command_drills'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'command_drills'
+                ? 'bg-amber-500 border-amber-600 text-white shadow-amber-200'
+                : 'bg-amber-100 hover:bg-amber-200 border-amber-300 text-amber-950'
+            }`}
+          >
+            <span>⚡ CLI Drills</span>
+          </button>
+
+          <button
             onClick={() => { sounds.playPop(); setCurrentView('exam_bank'); }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
               currentView === 'exam_bank'
