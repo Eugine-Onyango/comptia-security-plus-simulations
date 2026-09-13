@@ -472,6 +472,58 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: Checkpoint 2 (iptables Firewall Lab) */}
+          <div 
+            onClick={() => handleSelect('checkpoint2')}
+            class="group bg-gradient-to-br from-rose-700 via-orange-800 to-slate-950 text-white rounded-3xl p-6 border-4 border-rose-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-rose-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-rose-300 animate-bounce" />
+                  <span>Lab Task 5 Solution • Zero Hallucination</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-rose-950 font-black text-xs rounded-full shadow-sm">
+                  CHECKPOINT 2: IPTABLES MASTER GUIDE 🛡️
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🛡️🐧
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-rose-200 transition-colors">
+                    Checkpoint 2: Practical iptables Firewall Controls on Kali 🛡️
+                  </h3>
+                  <p class="text-rose-100 text-sm font-medium mt-1">
+                    Master Linux packet filtering step-by-step! Learn how to inspect the rulebase (<strong>iptables -L -n -v</strong>), establish a clean ping baseline, block ICMP pings (<strong>-p icmp -j DROP</strong>), remove rules (<strong>-D</strong>), and blackhole an entire host IP address (<strong>-s &lt;IP&gt; -j DROP</strong>) with live interactive packet gate simulations!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 1: Check iptables -L & Active Chains</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 2: Baseline Host-to-VM Ping</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 3: Block ICMP (-p icmp -j DROP) & Observe</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 4: Delete Rule (-D INPUT) & Restore</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 5: Blacklist Entire Host IP (-s &lt;IP&gt;)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Step 6: Remove Host Block & Verify</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-rose-400/40 flex items-center justify-between text-rose-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-rose-300 group-hover:translate-x-1 transition-transform" />
+                <span>Open Checkpoint 2 iptables Guide & Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-rose-400 text-slate-950 rounded-full font-black text-xs">
+                Open Checkpoint 2 🛡️
+              </span>
+            </div>
+          </div>
+
+
 
           {/* Domain 1.0 Card */}
           <div

@@ -143,6 +143,7 @@ import NmapStudioSim from './components/simulations/NmapStudioSim';
 import WiresharkOdysseyStudioSim from './components/simulations/WiresharkOdysseyStudioSim';
 import CommandMasterStudioSim from './components/simulations/CommandMasterStudioSim';
 import Checkpoint1StudioSim from './components/simulations/Checkpoint1StudioSim';
+import Checkpoint2StudioSim from './components/simulations/Checkpoint2StudioSim';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'domain1', 'domain2', 'domain3', 'domain4', 'domain5', ...
@@ -177,6 +178,7 @@ export default function App() {
               if (domainId === 'wireshark_odyssey') setCurrentView('wireshark_odyssey');
               if (domainId === 'command_drills') setCurrentView('command_drills');
               if (domainId === 'checkpoint1') setCurrentView('checkpoint1');
+              if (domainId === 'checkpoint2') setCurrentView('checkpoint2');
             }}
           />
         )}
@@ -207,6 +209,10 @@ export default function App() {
 
         {currentView === 'checkpoint1' && (
           <Checkpoint1StudioSim onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'checkpoint2' && (
+          <Checkpoint2StudioSim onBack={() => setCurrentView('home')} />
         )}
 
         {currentView === 'exam_bank' && (

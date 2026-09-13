@@ -121,6 +121,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
           </button>
 
           <button
+            onClick={() => { sounds.playPop(); setCurrentView('checkpoint2'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'checkpoint2'
+                ? 'bg-orange-600 border-orange-700 text-white shadow-orange-200'
+                : 'bg-orange-100 hover:bg-orange-200 border-orange-300 text-orange-950'
+            }`}
+          >
+            <span>🛡️ Checkpoint 2</span>
+          </button>
+
+          <button
             onClick={() => { sounds.playPop(); setCurrentView('command_drills'); }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
               currentView === 'command_drills'
