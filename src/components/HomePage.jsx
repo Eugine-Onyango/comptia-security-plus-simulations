@@ -422,6 +422,57 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: Checkpoint 1 (Virtualization & Networking Discovery) */}
+          <div 
+            onClick={() => handleSelect('checkpoint1')}
+            class="group bg-gradient-to-br from-indigo-700 via-purple-800 to-slate-950 text-white rounded-3xl p-6 border-4 border-indigo-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-indigo-200 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-indigo-300 animate-bounce" />
+                  <span>Hands-on Lab Solution • Zero Hallucination</span>
+                </div>
+                <span class="px-3 py-1 bg-rose-500 text-white font-black text-xs rounded-full shadow-sm">
+                  CHECKPOINT 1 MASTER GUIDE 🎯
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🐧🔌
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-indigo-300 transition-colors">
+                    Checkpoint 1: Virtualization, Networking & Web Service Discovery 🎯
+                  </h3>
+                  <p class="text-indigo-100 text-sm font-medium mt-1">
+                    Solve all 4 lab exercises step-by-step without confusion! Master <strong>Kali Linux installation & verification</strong>, <strong>ping 8.8.8.8</strong>, <strong>traceroute hop mapping</strong>, <strong>IP discovery (ip a vs ipconfig)</strong>, and <strong>VirtualBox NAT vs Bridged Adapter modes</strong> with live moving packet animations and Nairobi analogies!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Task 1: VirtualBox Kali Setup & ip a</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Task 2: ping 8.8.8.8 & Google DNS Objectives</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Task 2.1: traceroute 8.8.8.8 & Hop-by-Hop Breakdown</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Task 3: Host vs VM Ping (One-Way NAT Isolation)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Task 4: NAT vs Bridged Adapter Live Simulation</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-indigo-400/40 flex items-center justify-between text-indigo-200 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-indigo-300 group-hover:translate-x-1 transition-transform" />
+                <span>Open Checkpoint 1 Lab Guide & Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-indigo-400 text-indigo-950 rounded-full font-black text-xs">
+                Open Checkpoint 1 🎯
+              </span>
+            </div>
+          </div>
+
+
           {/* Domain 1.0 Card */}
           <div
             onClick={() => handleSelect('domain1')}
