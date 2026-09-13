@@ -92,69 +92,69 @@ export default function FirewallStudioSim({ onBack }) {
       )}
 
       {/* Mode Navigation Tabs */}
-      <div class="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 -mx-2 px-2 sm:mx-0 sm:px-0">
         
         {/* Tab 1: TCP Handshake */}
         <button
           onClick={() => handleTabChange('handshake')}
-          class={`px-5 py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 border-3 ${
+          className={`px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 border-2 sm:border-3 shrink-0 cursor-pointer ${
             activeTab === 'handshake'
-              ? 'bg-indigo-600 border-indigo-700 text-white shadow-lg shadow-indigo-200 scale-105'
+              ? 'bg-indigo-600 border-indigo-700 text-white shadow-lg shadow-indigo-200 scale-102'
               : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
           }`}
         >
-          <Play class="w-4 h-4 fill-current" />
-          <span>1. The TCP Handshake Ping-Pong Court 🏓</span>
+          <Play className="w-4 h-4 fill-current" />
+          <span>1. TCP Handshake 🏓</span>
         </button>
 
         {/* Tab 2: ACL Rule Table */}
         <button
           onClick={() => handleTabChange('acl_table')}
-          class={`px-5 py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 border-3 ${
+          className={`px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 border-2 sm:border-3 shrink-0 cursor-pointer ${
             activeTab === 'acl_table'
-              ? 'bg-amber-500 border-amber-600 text-white shadow-lg shadow-amber-200 scale-105'
+              ? 'bg-amber-500 border-amber-600 text-white shadow-lg shadow-amber-200 scale-102'
               : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
           }`}
         >
-          <ListOrdered class="w-4 h-4" />
-          <span>2. Interactive ACL Rule Table (Top-to-Bottom) 📋</span>
+          <ListOrdered className="w-4 h-4" />
+          <span>2. ACL Rule Table 📋</span>
         </button>
 
         {/* Tab 3: PBQ Troubleshooter */}
         <button
           onClick={() => handleTabChange('pbq')}
-          className={`px-5 py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 border-3 cursor-pointer ${
+          className={`px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 border-2 sm:border-3 shrink-0 cursor-pointer ${
             activeTab === 'pbq'
-              ? 'bg-emerald-600 border-emerald-700 text-white shadow-lg shadow-emerald-200 scale-105'
+              ? 'bg-emerald-600 border-emerald-700 text-white shadow-lg shadow-emerald-200 scale-102'
               : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
           }`}
         >
           <Wrench className="w-4 h-4" />
-          <span>3. Fix the Broken Firewall (CompTIA PBQ Challenge) 🔧</span>
+          <span>3. PBQ Challenge 🔧</span>
         </button>
 
         {/* Tab 4: Linux Firewall Sandbox (iptables, ufw, firewalld) */}
         <button
           onClick={() => handleTabChange('linux_firewalls')}
-          className={`px-5 py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 border-3 cursor-pointer ${
+          className={`px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 border-2 sm:border-3 shrink-0 cursor-pointer ${
             activeTab === 'linux_firewalls'
-              ? 'bg-amber-500 border-amber-600 text-slate-950 shadow-lg shadow-amber-200 scale-105'
+              ? 'bg-amber-500 border-amber-600 text-slate-950 shadow-lg shadow-amber-200 scale-102'
               : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
           }`}
         >
-          <span>🐧 4. Linux Firewall Sandbox (iptables • ufw • firewalld) ⚡</span>
+          <span>🐧 4. Linux Sandbox ⚡</span>
         </button>
 
         {/* Tab 5: Packet Filter vs. NGFW vs. WAF */}
         <button
           onClick={() => handleTabChange('waf_ngfw')}
-          className={`px-5 py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 border-3 cursor-pointer ${
+          className={`px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl font-black text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 sm:gap-2 border-2 sm:border-3 shrink-0 cursor-pointer ${
             activeTab === 'waf_ngfw'
-              ? 'bg-purple-600 border-purple-700 text-white shadow-lg shadow-purple-200 scale-105'
+              ? 'bg-purple-600 border-purple-700 text-white shadow-lg shadow-purple-200 scale-102'
               : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
           }`}
         >
-          <span>🔬 5. Packet Filter vs. NGFW vs. WAF (Who Catches What?) 🛡️</span>
+          <span>🔬 5. WAF vs NGFW 🛡️</span>
         </button>
 
       </div>

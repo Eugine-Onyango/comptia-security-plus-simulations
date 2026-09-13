@@ -215,39 +215,44 @@ export default function AclRuleTableSimulator() {
       </div>
 
       {/* FIREWALL ACL TABLE */}
-      <div class="bg-white rounded-3xl p-6 border-3 border-slate-300 shadow-lg space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
-          <div class="flex items-center gap-2">
-            <Sliders class="w-5 h-5 text-indigo-600" />
-            <h3 class="font-black text-slate-900 text-lg">
+      <div className="bg-white rounded-3xl p-3 sm:p-6 border-3 border-slate-300 shadow-lg space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-5 h-5 text-indigo-600" />
+            <h3 className="font-black text-slate-900 text-base sm:text-lg">
               Active Firewall Rule Base (ACL)
             </h3>
           </div>
 
-          <div class="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <button
               onClick={resetRules}
-              class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <RotateCcw class="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Default Order</span>
             </button>
           </div>
         </div>
 
+        {/* Mobile Swipe Hint */}
+        <div className="text-[10px] text-slate-400 font-medium sm:hidden flex items-center gap-1">
+          <span>👉 Swipe horizontally to inspect all table columns & reorder rules</span>
+        </div>
+
         {/* Table Container */}
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-100 text-slate-700 uppercase font-black text-[10px] border-b-2 border-slate-300">
+        <div className="overflow-x-auto no-scrollbar -mx-3 px-3 sm:mx-0 sm:px-0">
+          <table className="w-full min-w-[580px] text-left text-xs">
+            <thead className="bg-slate-100 text-slate-700 uppercase font-black text-[10px] border-b-2 border-slate-300">
               <tr>
-                <th class="p-3">Order</th>
-                <th class="p-3">Action</th>
-                <th class="p-3">Direction</th>
-                <th class="p-3">Source IP</th>
-                <th class="p-3">Dest IP</th>
-                <th class="p-3">Port</th>
-                <th class="p-3">Proto</th>
-                <th class="p-3">Reorder</th>
+                <th className="p-2 sm:p-3">Order</th>
+                <th className="p-2 sm:p-3">Action</th>
+                <th className="p-2 sm:p-3">Direction</th>
+                <th className="p-2 sm:p-3">Source IP</th>
+                <th className="p-2 sm:p-3">Dest IP</th>
+                <th className="p-2 sm:p-3">Port</th>
+                <th className="p-2 sm:p-3">Proto</th>
+                <th className="p-2 sm:p-3">Reorder</th>
               </tr>
             </thead>
 

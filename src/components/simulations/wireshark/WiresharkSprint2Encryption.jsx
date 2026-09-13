@@ -137,31 +137,31 @@ export default function WiresharkSprint2Encryption({ onSprintComplete }) {
     <div className="space-y-8 animate-fadeIn">
       
       {/* SPRINT SUB-NAVIGATION TABS */}
-      <div className="flex items-center justify-between flex-wrap gap-3 bg-white p-2 rounded-2xl border-2 border-slate-200 shadow-sm">
-        <div className="flex items-center gap-2">
+      <div className="flex items-stretch md:items-center justify-between flex-col md:flex-row gap-2 bg-white p-2 rounded-2xl border-2 border-slate-200 shadow-sm">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-1 px-1 sm:mx-0 sm:px-0">
           <button
             onClick={() => { sounds.playPop(); setActiveSubSprint('2.1'); }}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 ${
               activeSubSprint === '2.1'
                 ? 'bg-rose-600 text-white shadow-md shadow-rose-200 scale-102'
                 : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
             <Unlock className="w-4 h-4" />
-            <span>2.1 The Leaky Postcard (Plaintext HTTP)</span>
+            <span>2.1 Plaintext HTTP</span>
             {postcardVerified && <CheckCircle2 className="w-3.5 h-3.5 text-white fill-white/20" />}
           </button>
 
           <button
             onClick={() => { sounds.playPop(); setActiveSubSprint('2.2'); }}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 ${
               activeSubSprint === '2.2'
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200 scale-102'
                 : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
             <Lock className="w-4 h-4" />
-            <span>2.2 The Locked Armor Box (TLS 1.3)</span>
+            <span>2.2 Locked Box (TLS 1.3)</span>
             {lockedBoxVerified && <CheckCircle2 className="w-3.5 h-3.5 text-white fill-white/20" />}
           </button>
         </div>

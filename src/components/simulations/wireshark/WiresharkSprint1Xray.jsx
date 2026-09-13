@@ -123,45 +123,45 @@ export default function WiresharkSprint1Xray({ onSprintComplete }) {
     <div className="space-y-8">
       
       {/* Sub-Sprint Navigation Pills */}
-      <div className="bg-white rounded-3xl p-3 border-3 border-cyan-200 shadow-sm flex flex-wrap gap-2 items-center justify-between">
-        <div className="flex flex-wrap gap-2">
+      <div className="bg-white rounded-3xl p-2.5 sm:p-3 border-3 border-cyan-200 shadow-sm flex flex-col md:flex-row gap-2 items-stretch md:items-center md:justify-between">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-1 px-1 sm:mx-0 sm:px-0">
           
           <button
             onClick={() => { sounds.playPop(); setActiveSubSprint('1.1'); }}
-            className={`px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap shrink-0 ${
               activeSubSprint === '1.1'
                 ? 'bg-cyan-600 text-white shadow-md shadow-cyan-200 scale-102'
                 : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
             }`}
           >
             <Activity className="w-4 h-4" />
-            <span>1.1 The First Live Sniff</span>
+            <span>1.1 First Live Sniff</span>
             {firstSniffVerified && <CheckCircle2 className="w-4 h-4 text-cyan-200" />}
           </button>
 
           <button
             onClick={() => { sounds.playPop(); setActiveSubSprint('1.2'); }}
-            className={`px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap shrink-0 ${
               activeSubSprint === '1.2'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200 scale-102'
                 : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
             }`}
           >
             <Filter className="w-4 h-4" />
-            <span>1.2 Display Filter Earmuffs</span>
+            <span>1.2 Display Filters</span>
             {filterVerified && <CheckCircle2 className="w-4 h-4 text-indigo-200" />}
           </button>
 
           <button
             onClick={() => { sounds.playPop(); setActiveSubSprint('1.3'); }}
-            className={`px-4 py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer ${
+            className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl font-black text-xs sm:text-sm transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap shrink-0 ${
               activeSubSprint === '1.3'
                 ? 'bg-purple-600 text-white shadow-md shadow-purple-200 scale-102'
                 : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
             }`}
           >
             <Layers className="w-4 h-4" />
-            <span>1.3 Envelope Layers & 3-Pane X-Ray</span>
+            <span>1.3 Envelope Layers & 3-Pane</span>
             {layersVerified && <CheckCircle2 className="w-4 h-4 text-purple-200" />}
           </button>
 

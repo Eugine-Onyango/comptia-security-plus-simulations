@@ -9,6 +9,7 @@ body {
 /* Custom friendly scrollbars & animations */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #fef3c7;
@@ -20,6 +21,16 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #d97706;
 }
+
+/* Hide scrollbar for clean mobile ribbon swiping */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
