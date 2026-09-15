@@ -139,7 +139,18 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
                 : 'bg-amber-100 hover:bg-amber-200 border-amber-300 text-amber-950'
             }`}
           >
-            <span>🏛️ PrepSet Exam Bank</span>
+            <span>🏛️ PrepSet D1</span>
+          </button>
+
+          <button
+            onClick={() => { sounds.playPop(); setCurrentView('prepset_domain2'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'prepset_domain2'
+                ? 'bg-rose-600 border-rose-700 text-white shadow-rose-200'
+                : 'bg-rose-100 hover:bg-rose-200 border-rose-300 text-rose-950'
+            }`}
+          >
+            <span>🔥 PrepSet D2</span>
           </button>
 
           <button

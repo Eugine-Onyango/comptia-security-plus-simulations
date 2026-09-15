@@ -565,10 +565,60 @@ export default function HomePage({ onSelectDomain }) {
             <div class="mt-6 pt-4 border-t border-amber-400/40 flex items-center justify-between text-amber-100 font-black text-base">
               <span class="flex items-center gap-2">
                 <ChevronRight class="w-5 h-5 text-amber-200 group-hover:translate-x-1 transition-transform" />
-                <span>Launch PrepSet Domain 1.0 Exam Simulator →</span>
+                <span>Launch PrepSet Domain 1.0 Exam Simulator (50 Scenarios) →</span>
               </span>
               <span class="px-3 py-1 bg-white text-amber-950 rounded-full font-black text-xs">
-                Start PrepSet Batch 1 🏛️
+                Start Domain 1.0 🏛️
+              </span>
+            </div>
+          </div>
+
+          {/* FEATURED: PrepSet Domain 2.0 Exam Simulator (Threats, Vulnerabilities & Mitigations) */}
+          <div 
+            onClick={() => handleSelect('prepset_domain2')}
+            class="group bg-gradient-to-br from-rose-600 via-rose-700 to-red-950 text-white rounded-3xl p-6 border-4 border-rose-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-rose-100 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-rose-200 animate-bounce" />
+                  <span>Exam-Grade Scenario Simulator • Real-World Breach Forensics</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-rose-950 font-black text-xs rounded-full shadow-sm">
+                  PREPSET EXAM BANK: DOMAIN 2.0 🔥
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🛡️⚔️
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-rose-200 transition-colors">
+                    PrepSet Advanced Exam Bank: Domain 2.0 (Threats, Vulnerabilities & Mitigations) 🔥
+                  </h3>
+                  <p class="text-rose-100 text-sm font-medium mt-1">
+                    Master tough CompTIA SY0-701 scenarios on <strong>Nation-State APTs & Cyber Espionage</strong>, <strong>Business Email Compromise (BEC & Account Takeover)</strong>, <strong>IDN Homograph & Typosquatting</strong>, <strong>Selective Watering Hole Attacks</strong>, and <strong>Voice Phishing (Vishing) with Deepfake Audio Pretexting</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q1: Nation-State APTs & LotL Cyber Espionage</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q2: BEC Account Takeover & Out-of-Band Callbacks</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q3: Typosquatting & Punycode Homograph Deception</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q4: Targeted Watering Hole Exploits & IP Profiling</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q5: Deepfake Audio Vishing & Authority Pretexting</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-rose-400/40 flex items-center justify-between text-rose-100 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-rose-200 group-hover:translate-x-1 transition-transform" />
+                <span>Launch PrepSet Domain 2.0 Exam Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-white text-rose-950 rounded-full font-black text-xs">
+                Start Domain 2.0 🔥
               </span>
             </div>
           </div>
