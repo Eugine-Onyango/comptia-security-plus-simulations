@@ -363,6 +363,190 @@ export const DOMAIN1_PREPSET_QUESTIONS = [
     ],
     technicalRationale: "ABAC provides fine-grained, conditional access control based on policies that combine subject, object, action, and environmental attributes. It is the core access engine behind modern Zero Trust architectures.",
     kenyanMetaphor: "RBAC is an M-Pesa agent badge that lets anyone in an M-Pesa uniform open the store safe at any time. ABAC is a smart biometric safe that checks: Is the person staff? (Subject) + Is it between 9:00 AM and 5:00 PM? (Time) + Is the shop's panic alarm disarmed? (Device) + Is the safe connected to the branch Wi-Fi? (Location). If the manager arrives at midnight, the safe stays locked!"
+  },
+
+  // ==========================================
+  // PORTION 3 (Q11 - Q15)
+  // ==========================================
+  {
+    id: 11,
+    portion: 3,
+    subdomain: "1.4 Encryption Technologies / Hardware Root of Trust",
+    scenario: "A financial firm deploying high-security laptops for forensic auditors needs to guarantee that the operating system kernel and bootloader have not been modified or tampered with by an offline rootkit while powered off. The device must execute a measured boot sequence where cryptographic hashes of the UEFI firmware, boot configuration, and kernel are stored into tamper-resistant hardware registers before releasing the full-disk decryption key.",
+    question: "Which of the following architectural components provides this hardware root of trust and measured boot capability?",
+    options: [
+      {
+        text: "Trusted Platform Module (TPM 2.0) utilizing Platform Configuration Registers (PCRs)",
+        isCorrect: true,
+        whyCorrect: "TPM 2.0 is a dedicated, tamper-resistant cryptographic microchip that establishes the hardware Root of Trust. During measured boot, it records cryptographic hashes of each startup component into Platform Configuration Registers (PCRs). If any component is modified, PCR values do not match, and the TPM seals the volume decryption key.",
+        whyWrong: ""
+      },
+      {
+        text: "Hardware Security Module (HSM)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "An HSM is a dedicated high-throughput network appliance used in data centers for centralized key generation, CA signing, and payment processing, not for endpoint laptop measured boot."
+      },
+      {
+        text: "Centralized Key Management Service (KMS)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A KMS is a cloud or software service for managing, rotating, and controlling application encryption keys, not a local endpoint physical crypto chip."
+      },
+      {
+        text: "Self-Encrypting Drive (SED) with OPAL standard",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "An SED performs hardware encryption at the disk controller level, but it does not measure or cryptographically attest to the integrity of motherboard UEFI firmware or OS bootloader files."
+      }
+    ],
+    technicalRationale: "A Hardware Root of Trust (TPM 2.0) guarantees system integrity from power-on. Measured boot records hashes of firmware, bootloader, and kernel drivers into PCRs. If hashes match the baseline, keys are unsealed to unlock the drive.",
+    kenyanMetaphor: "The locked dispatch truck carrying cash for Central Bank of Kenya. An SED is just a heavy steel door on the container. The TPM 2.0 is the tamper-evident biometric seal: before the ignition starts, it inspects every single lock, engine component, and cargo seal. If even one screw was loosened overnight, the truck immobilizer locks down completely."
+  },
+
+  {
+    id: 12,
+    portion: 3,
+    subdomain: "1.4 Encrypting Data / Data States",
+    scenario: "A healthcare provider must process sensitive patient genomic sequencing data in an external multi-tenant public cloud. While data at rest is encrypted with AES-256 and data in transit is protected via TLS 1.3, hospital compliance officers fear that an untrusted cloud hypervisor administrator or an attacker with physical RAM access could dump plaintext data directly from memory while the CPU is actively crunching analytics.",
+    question: "Which of the following security technologies directly mitigates this threat to data in use?",
+    options: [
+      {
+        text: "Confidential Computing via Hardware Secure Enclaves (e.g., AMD SEV / Intel SGX)",
+        isCorrect: true,
+        whyCorrect: "Confidential Computing protects data in use by isolating data and computation inside hardware-encrypted CPU enclaves. Even with root or hypervisor-level access, memory pages are encrypted in RAM and decrypted only inside the CPU cache.",
+        whyWrong: ""
+      },
+      {
+        text: "Transparent Data Encryption (TDE)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "TDE protects data at rest by encrypting database storage files, transaction logs, and backups on disk. However, records are decrypted into system RAM during active queries."
+      },
+      {
+        text: "Perfect Forward Secrecy (PFS)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "PFS protects data in transit against historical decryption if the server's long-term private key is later compromised; it does not protect data residing in active CPU memory."
+      },
+      {
+        text: "Format-Preserving Encryption (FPE) for database columns",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "FPE preserves the format and length of sensitive text (e.g., credit card numbers) in storage and transit, but does not provide hardware memory isolation in volatile RAM."
+      }
+    ],
+    technicalRationale: "Data in Use represents information actively resident in volatile memory (RAM, CPU cache, registers). Confidential Computing uses hardware-based Trusted Execution Environments (TEEs) to protect memory from hypervisor, host OS, and physical memory dump attacks.",
+    kenyanMetaphor: "Sending your maize to a commercial posho mill in Kisumu. AES-256 is the locked gunny bag on the lorry (Data at Rest). TLS 1.3 is the armed escort escorting the lorry along the highway (Data in Transit). Confidential Computing is having your personal private robotic milling booth inside the factory where not even the posho mill owner can look inside or take a handful while the grain is being ground into unga (Data in Use)."
+  },
+
+  {
+    id: 13,
+    portion: 3,
+    subdomain: "1.2 Deception & Disruption Concepts",
+    scenario: "An enterprise security operations team wants an early warning detection mechanism for credential harvesting and lateral movement inside their Active Directory domain. The team provisions a fake user account named 'svc-domainadmin' with an enticing description and leaves its plaintext password inside a dummy configuration file on a shared network drive. The account has no legitimate business permissions, is never used by real employees, and any authentication request using this account triggers an immediate Tier-1 critical SIEM alarm.",
+    question: "Which of the following deception technologies has the team deployed?",
+    options: [
+      {
+        text: "Honeytoken",
+        isCorrect: true,
+        whyCorrect: "A honeytoken is a decoy piece of data (such as a fake user account, dummy API credential, simulated database row, or faux sensitive document) planted deliberately to bait intruders. Since legitimate users never interact with it, any access is a high-fidelity indicator of compromise (IoC).",
+        whyWrong: ""
+      },
+      {
+        text: "Honeypot",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A honeypot is an entire decoy system, server, or virtual machine designed to mimic a legitimate network target, not an individual fake credential or decoy account."
+      },
+      {
+        text: "Honeynet",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A honeynet is a complete network segment composed of multiple interconnected honeypots mimicking a corporate subnet, not an isolated credential or file."
+      },
+      {
+        text: "DNS Sinkhole",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A DNS sinkhole intercepts malicious domain lookups and returns an innocuous IP address to disrupt malware botnet C2 communications, not a decoy credential."
+      }
+    ],
+    technicalRationale: "CompTIA classifies deception tools by scope: Honeypot (system), Honeynet (network), Honeyfile (file), and Honeytoken (credential, API key, or data element). Honeytokens produce near-zero false-positive alerts.",
+    kenyanMetaphor: "Leaving a marked Ksh 1,000 note laced with invisible ink on the office reception counter. No honest employee has any reason to take it. The moment anyone touches that specific note, their fingers turn fluorescent purple under UV light and the security alarm sounds!"
+  },
+
+  {
+    id: 14,
+    portion: 3,
+    subdomain: "1.2 Physical Security Controls",
+    scenario: "A core telecom data center housing national routing infrastructure must prevent unauthorized individuals from slipping in behind authorized staff through exterior access points. The facility installs an entryway featuring an enclosed, interlocking two-door portal where the second interior door remains securely locked until the first exterior door is completely closed and the person inside successfully authenticates via biometrics and a floor weight scale sensor.",
+    question: "Which of the following physical security controls has been installed?",
+    options: [
+      {
+        text: "Access Control Vestibule (Mantrap)",
+        isCorrect: true,
+        whyCorrect: "An access control vestibule (formerly termed a mantrap) consists of an enclosed double-door portal where one door must fully close and lock before the second door can open. When combined with biometrics and floor weight sensors, it guarantees single-occupant passage and eliminates tailgating and piggybacking.",
+        whyWrong: ""
+      },
+      {
+        text: "Anti-passback Turnstile",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Anti-passback is a logical credential rule preventing an RFID badge from being swiped twice in succession without an intervening exit swipe, but it lacks physical two-door airlock containment."
+      },
+      {
+        text: "Reinforced Crash Bollards",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Bollards are heavy vertical concrete or steel posts installed along building perimeters to stop vehicular ram-raids, not interior personnel entry controls."
+      },
+      {
+        text: "Faraday Cage Enclosure",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A Faraday cage blocks electromagnetic radiation and radio frequency signals to prevent eavesdropping or EMI leakage, not a physical access entry booth."
+      }
+    ],
+    technicalRationale: "Access control vestibules enforce strict physical separation between untrusted exterior and trusted interior zones. They physically neutralize tailgating (following without consent) and piggybacking (following with consent).",
+    kenyanMetaphor: "The high-security bulletproof airlock booths at the entrance of major commercial banks in downtown Nairobi (e.g. KCB or Equity Bank). The outer glass door must lock shut behind you before you can press your thumbprint or wait for the guard to release the inner door into the banking hall."
+  },
+
+  {
+    id: 15,
+    portion: 3,
+    subdomain: "1.2 Security Frameworks & Baselines",
+    scenario: "A technology company prepares to expand international operations and must achieve ISO/IEC 27001 certification. Prior to scheduling an accredited external auditor, the internal governance, risk, and compliance (GRC) team conducts a formal assessment to compare the organization's existing security policies, operational procedures, and technical configurations against the ISO 27001 Annex A control standards to identify missing, unmonitored, or incomplete controls.",
+    question: "Which of the following activities is the GRC team performing?",
+    options: [
+      {
+        text: "Gap Analysis",
+        isCorrect: true,
+        whyCorrect: "A gap analysis compares an organization's current security posture and operational controls against a defined target framework, regulatory standard (like ISO 27001, NIST CSF), or baseline to identify deficiencies and map out remediation actions.",
+        whyWrong: ""
+      },
+      {
+        text: "Vulnerability Assessment",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A vulnerability assessment uses automated scanning software to discover known software flaws, missing patches, and weak configurations across IP endpoints, not organizational compliance with a governance standard."
+      },
+      {
+        text: "Penetration Testing",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Penetration testing is an active, authorized simulation of an adversarial attack to exploit vulnerabilities and test incident response capabilities."
+      },
+      {
+        text: "Business Impact Analysis (BIA)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A BIA identifies mission-critical business functions and quantifies the financial and operational impact of outages to establish Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO)."
+      }
+    ],
+    technicalRationale: "Gap analysis identifies discrepancies between 'where we are' (current state) and 'where we need to be' (target standard/baseline). It is the foundational first step in any security framework adoption or compliance audit preparation.",
+    kenyanMetaphor: "Before inviting Kenya Revenue Authority (KRA) or KEBS inspectors to certify your factory, you hire an internal auditor with the official KEBS standard checklist to inspect your machinery and hygiene logs against each requirement, noting down every area that falls short so you can fix it before the official audit."
   }
 ];
+
 
