@@ -721,6 +721,55 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: PrepSet Domain 5.0 Exam Simulator (Governance, Risk, and Compliance) */}
+          <div 
+            onClick={() => handleSelect('prepset_domain5')}
+            class="group bg-gradient-to-br from-emerald-800 via-teal-900 to-slate-950 text-white rounded-3xl p-6 border-4 border-emerald-400 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-emerald-100 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-emerald-200 animate-bounce" />
+                  <span>Exam-Grade Scenario Simulator • Enterprise GRC & Risk Management</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-emerald-950 font-black text-xs rounded-full shadow-sm">
+                  PREPSET EXAM BANK: DOMAIN 5.0 ⚖️
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  ⚖️🏛️
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-emerald-200 transition-colors">
+                    PrepSet Advanced Exam Bank: Domain 5.0 (Governance, Risk, and Compliance) ⚖️
+                  </h3>
+                  <p class="text-emerald-100 text-sm font-medium mt-1">
+                    Master critical CompTIA SY0-701 scenarios across <strong>Security Policies & Standards</strong> (ISO 27001/27002, NIST SP 800-53), <strong>Data Roles & Responsibilities</strong>, <strong>NIST RMF Lifecycle</strong>, <strong>Quantitative & Qualitative Risk Calculations</strong> (SLE, ARO, ALE, Risk Registers), <strong>BIA & Reliability Metrics</strong> (MTD, RTO, RPO, WRT, MTBF, MTTR), <strong>Third-Party Vendor Risk & Agreement Types</strong> (SLA, MOU, MOA, NDA, BPA, ISA, SOC 2 Type II), and <strong>Global Privacy & Compliance Regulations</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 5.1: Policies, Standards & Procedures</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 5.2: Risk Management & BIA</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 5.3: Vendor Risk & Agreements</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 5.4-5.6: Compliance, Audits & Training</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-emerald-400/40 flex items-center justify-between text-emerald-100 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-emerald-200 group-hover:translate-x-1 transition-transform" />
+                <span>Launch PrepSet Domain 5.0 Exam Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-white text-emerald-950 rounded-full font-black text-xs">
+                Start Domain 5.0 ⚖️
+              </span>
+            </div>
+          </div>
+
           {/* Domain 1.0 Card */}
           <div
             onClick={() => handleSelect('domain1')}
