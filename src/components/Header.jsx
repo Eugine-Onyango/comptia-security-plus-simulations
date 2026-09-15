@@ -154,6 +154,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
           </button>
 
           <button
+            onClick={() => { sounds.playPop(); setCurrentView('prepset_domain3'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'prepset_domain3'
+                ? 'bg-indigo-600 border-indigo-700 text-white shadow-indigo-200'
+                : 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300 text-indigo-950'
+            }`}
+          >
+            <span>🏰 PrepSet D3</span>
+          </button>
+
+          <button
             onClick={() => { sounds.playPop(); setCurrentView('command_drills'); }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
               currentView === 'command_drills'
