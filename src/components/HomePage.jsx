@@ -523,6 +523,57 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: PrepSet Exam Simulator (Hard-Mode Scenario Practice) */}
+          <div 
+            onClick={() => handleSelect('prepset_domain1')}
+            class="group bg-gradient-to-br from-amber-600 via-amber-700 to-orange-900 text-white rounded-3xl p-6 border-4 border-amber-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-amber-100 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-amber-200 animate-bounce" />
+                  <span>Exam-Grade Scenario Simulator • Zero Predictable Answers</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-amber-950 font-black text-xs rounded-full shadow-sm">
+                  PREPSET EXAM BANK: DOMAIN 1.0 BATCH 1 🏛️
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🏛️🎯
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-amber-200 transition-colors">
+                    PrepSet Advanced Exam Bank: Domain 1.0 (General Security Concepts) 🏛️
+                  </h3>
+                  <p class="text-amber-100 text-sm font-medium mt-1">
+                    Step up to realistic CompTIA certification exam difficulty! Practice tough, scenario-driven questions on <strong>Zero Trust Architecture (PDP vs PEP)</strong>, <strong>Perfect Forward Secrecy & Ephemeral Diffie-Hellman</strong>, <strong>OCSP Stapling</strong>, <strong>SAML 2.0 Web SSO</strong>, and <strong>Control Classifications</strong> with full distractor autopsies and Kenyan analogies!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q1: NIST Zero Trust Architecture (PDP vs PEP vs Data Plane)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q2: Key Exchange & Perfect Forward Secrecy (DHE / ECDHE)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q3: High-Volume Certificate Validation (OCSP Stapling)</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q4: Cloud Federation & SAML Service Provider Flows</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Q5: Functional Control Types (Deterrent, Preventive, Detective)</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-amber-400/40 flex items-center justify-between text-amber-100 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-amber-200 group-hover:translate-x-1 transition-transform" />
+                <span>Launch PrepSet Domain 1.0 Exam Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-white text-amber-950 rounded-full font-black text-xs">
+                Start PrepSet Batch 1 🏛️
+              </span>
+            </div>
+          </div>
+
+
 
 
           {/* Domain 1.0 Card */}
