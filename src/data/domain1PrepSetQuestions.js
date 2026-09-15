@@ -180,5 +180,189 @@ export const DOMAIN1_PREPSET_QUESTIONS = [
     ],
     technicalRationale: "CompTIA SY0-701 categorizes controls in two dimensions: Category (Technical, Managerial, Operational, Physical) and Functional Type (Preventive, Detective, Corrective, Deterrent, Compensating). SIEM = Detective; Biometrics/Mantrap = Preventive; Warning signs/Training = Deterrent.",
     kenyanMetaphor: "(1) Deterrent: A billboard at an M-Pesa kiosk stating 'Premises under CCTV surveillance; fraud attempts reported to DCI' (discourages bad actors). (2) Preventive: Double steel security grilles with biometric fingerprints (physically stops unauthorized entry). (3) Detective: Motion-sensor sirens ringing when a thief climbs through the ceiling (spots the intrusion)."
+  },
+
+  // ==========================================
+  // PORTION 2 (Q6 - Q10)
+  // ==========================================
+  {
+    id: 6,
+    portion: 2,
+    subdomain: "1.4 Hashing, Passwords & Salting",
+    scenario: "A database administrator discovers that two distinct employee accounts in the user database have identical 64-character hexadecimal password hash strings, despite both employees swearing they use completely different passwords. A security engineer investigates and notes that the application computes SHA-256(password) directly before storing it. The engineer recommends modifying the authentication module to prepend a cryptographically secure random 128-bit value to each password prior to hashing.",
+    question: "Which of the following vulnerabilities does this modification PRIMARILY mitigate?",
+    options: [
+      {
+        text: "Pre-computed Rainbow Table and credential-matching attacks",
+        isCorrect: true,
+        whyCorrect: "Without a salt, two identical passwords produce the exact same hash output, allowing attackers to match hashes and crack passwords instantly using pre-computed Rainbow Tables. Prepending a random salt ensures every hash is unique even if the plaintext password is identical, rendering pre-computed tables useless.",
+        whyWrong: ""
+      },
+      {
+        text: "Quantum-computing Grover's algorithm attacks",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Grover's algorithm provides a quadratic mathematical speedup for searching unsorted databases (halving effective symmetric key and hash pre-image lengths). Salting does not defend against quantum computing speedups; larger hash output lengths (e.g. SHA-384/512) do."
+      },
+      {
+        text: "Asymmetric Private Key exfiltration",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Password hashing is a symmetric one-way authentication mechanism. Salting passwords has nothing to do with asymmetric public/private key pairs (such as RSA or ECC)."
+      },
+      {
+        text: "Hash Collision attacks where H(m1) = H(m2)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "A hash collision is a cryptographic mathematical failure where two different plaintexts produce the identical hash digest. The scenario is not a mathematical collision; both users had the same password hashed identically because no salt was applied."
+      }
+    ],
+    technicalRationale: "Salting (RFC 2898 / NIST SP 800-63B) defeats precomputed dictionary and rainbow table attacks by ensuring that identical passwords result in distinct hash digests across users.",
+    kenyanMetaphor: "An apartment block in South B where every tenant buys the identical padlock from a local hardware shop. A burglar immediately notices that Door 4 and Door 12 share the same key pattern, or buys a master skeleton key from the hardware (Rainbow Table). Salting is like welding a unique random steel pin onto each lock cylinder so no pre-made key can open both doors!"
+  },
+
+  {
+    id: 7,
+    portion: 2,
+    subdomain: "1.2 CIA Triad & Non-Repudiation",
+    scenario: "A company CEO sends a digitally signed email authorizing an immediate wire transfer of $500,000 to an international vendor. Two days later, during an internal fraud investigation, the CEO claims she never sent the email and argues that an insider forged her signature. A digital forensics investigator proves that the message was signed using the CEO's unique private key, the computed hash matched the message digest, and the digital certificate was valid at the timestamp of transmission.",
+    question: "Which fundamental security principle does this cryptographic evidence demonstrate?",
+    options: [
+      {
+        text: "Non-repudiation",
+        isCorrect: true,
+        whyCorrect: "Non-repudiation provides indisputable proof of the origin and integrity of data, ensuring that the sender cannot falsely deny sending the message. Because only the CEO holds her private key, a valid digital signature proves the message originated from her and was not modified in transit.",
+        whyWrong: ""
+      },
+      {
+        text: "Confidentiality",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Confidentiality protects data from unauthorized disclosure (usually via symmetric encryption like AES). A digital signature alone does not encrypt the email text; an eavesdropper could still read the email contents in transit."
+      },
+      {
+        text: "Obfuscation",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Obfuscation masks code or data to make it difficult for humans to inspect or decompile (e.g., variable renaming). It provides zero cryptographic proof of authenticity."
+      },
+      {
+        text: "High Availability",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Availability ensures authorized users have timely, uninterrupted access to systems (via clustering, backups, and redundancy), which is unrelated to digital signature proof."
+      }
+    ],
+    technicalRationale: "Non-repudiation is achieved when a message hash is encrypted with the sender's private key. In CompTIA SY0-701, digital signatures uniquely satisfy both Integrity (via the hash) and Non-repudiation (via the asymmetric private key).",
+    kenyanMetaphor: "A wealthy landowner signing a land sale agreement in Nairobi before a licensed advocate with their personal biometric thumbprint, national ID number, and sworn affidavit. If the landowner later tries to claim 'Hiyo sio saini yangu, sikuuza shamba' (That wasn't my signature), the advocate and forensic fingerprint experts prove in court that only their physical thumb could have made that impression."
+  },
+
+  {
+    id: 8,
+    portion: 2,
+    subdomain: "1.4 Authentication vs. Authorization (OIDC & OAuth)",
+    scenario: "A mobile application developer wants to allow users to sign into a fitness tracker using their existing Google accounts rather than registering new passwords. Once authenticated, the mobile app also requests user consent to read their Google Calendar appointments to schedule workouts automatically. The security architect reviews the integration to ensure modern, industry-standard protocols are implemented.",
+    question: "Which combination of protocols correctly handles user authentication AND delegated access authorization in this architecture?",
+    options: [
+      {
+        text: "OpenID Connect (OIDC) for authentication; OAuth 2.0 for authorization",
+        isCorrect: true,
+        whyCorrect: "OAuth 2.0 is strictly an authorization framework (issuing access tokens to access resources like Google Calendar). OpenID Connect (OIDC) is an identity layer built directly on top of OAuth 2.0 that issues an ID Token (JWT) to authenticate who the user is.",
+        whyWrong: ""
+      },
+      {
+        text: "RADIUS for authentication; TACACS+ for authorization",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "RADIUS and TACACS+ are legacy AAA protocols used for networking equipment (routers, switches, VPNs), not modern RESTful web and mobile cloud application federations."
+      },
+      {
+        text: "Kerberos for authentication; LDAP for authorization",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Kerberos and LDAP are on-premises directory protocols operating inside local Windows Active Directory corporate networks, not public mobile cloud app APIs."
+      },
+      {
+        text: "SAML 2.0 for authentication; NTLM for authorization",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "SAML is a heavyweight XML-based enterprise web browser protocol, not ideal for native mobile REST APIs. NTLM is a legacy, vulnerable Microsoft challenge-response protocol."
+      }
+    ],
+    technicalRationale: "CompTIA SY0-701 distinguishes: OAuth 2.0 = Authorization (Access Tokens for API resources); OpenID Connect (OIDC) = Authentication (ID Tokens containing user profile claims).",
+    kenyanMetaphor: "Visiting a government building in Nairobi. OpenID Connect is showing your National ID card to prove who you are at reception. OAuth 2.0 is giving a written gate pass to your driver allowing him to collect a specific box from the basement storeroom on your behalf."
+  },
+
+  {
+    id: 9,
+    portion: 2,
+    subdomain: "1.4 PKI Certificate Formats & Encoding",
+    scenario: "A Linux administrator configuring an Apache web server receives a certificate package from a Windows administrator with the file extension .pfx. The Apache configuration requires separate, plain-text ASCII Base64 files: one containing the private key, and the other containing the public certificate chain, both beginning with visible '-----BEGIN' headers.",
+    question: "Which of the following file format conversions must the administrator execute?",
+    options: [
+      {
+        text: "Convert binary PKCS#12 (.pfx / .p12) to Base64-encoded PEM (.crt / .key)",
+        isCorrect: true,
+        whyCorrect: "PKCS#12 (.pfx/.p12) is a password-protected binary format that bundles the private key and certificate chain together (common on Windows). PEM is the ASCII Base64 format with '-----BEGIN' headers used by Linux/Apache. The admin must extract the PEM .crt and .key using OpenSSL.",
+        whyWrong: ""
+      },
+      {
+        text: "Convert DER binary (.der) to raw binary CER (.cer)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Both DER and CER are binary encodings without ASCII headers, and neither extracts the separate private key required by the Apache configuration."
+      },
+      {
+        text: "Convert Certificate Revocation Lists (CRL) to OCSP format",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "CRLs and OCSP are revocation validation mechanisms, not web server X.509 certificate file storage formats."
+      },
+      {
+        text: "Convert OpenSSH public keys to PGP keyring format",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "SSH keys and PGP keyrings are completely different cryptographic tools, unrelated to X.509 SSL/TLS web server certificates."
+      }
+    ],
+    technicalRationale: "CompTIA tests X.509 certificate encodings: PEM (ASCII Base64, -----BEGIN...), DER (Binary), and PKCS#12 / PFX (Binary archive containing both certificate and private key).",
+    kenyanMetaphor: "A locked leather briefcase containing your passport, driving license, and house keys all zipped together inside (PKCS#12 / .pfx). The airport security desk requires you to hold your passport open in one hand and your boarding pass in the other as separate loose sheets of paper (PEM .crt & .key). You must open the briefcase and separate them!"
+  },
+
+  {
+    id: 10,
+    portion: 2,
+    subdomain: "1.4 Access Control Schemes (ABAC vs RBAC vs MAC)",
+    scenario: "A multinational aerospace firm requires an access control scheme where access to sensitive drone schematics is evaluated dynamically based on four criteria: (1) Employee security clearance level; (2) Time of access (strictly Monday to Friday, 0800 to 1700); (3) Device encryption status (must have BitLocker active); and (4) Geolocation (must originate from within authorized corporate facility IP subnets). Even if an authorized Senior Engineer attempts access, if they log in from home at midnight on an unencrypted laptop, access is immediately blocked.",
+    question: "Which of the following access control models is being implemented?",
+    options: [
+      {
+        text: "Attribute-Based Access Control (ABAC)",
+        isCorrect: true,
+        whyCorrect: "Attribute-Based Access Control (ABAC, NIST SP 800-162) evaluates multiple dynamic attributes (subject, resource, action, and contextual environment like time, location, and device health) to make real-time access decisions.",
+        whyWrong: ""
+      },
+      {
+        text: "Role-Based Access Control (RBAC)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "Traditional RBAC assigns permissions strictly based on static job titles or group memberships (e.g., 'Senior Engineer'). It cannot natively evaluate dynamic contextual variables like time, device encryption, or geolocation."
+      },
+      {
+        text: "Discretionary Access Control (DAC)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "In DAC, the owner/creator of the data has complete discretion to grant or revoke access to others (e.g. NTFS file permissions). It does not enforce mandatory corporate contextual rules."
+      },
+      {
+        text: "Mandatory Access Control (MAC)",
+        isCorrect: false,
+        whyCorrect: "",
+        whyWrong: "MAC relies on static classification labels (Top Secret, Secret, Confidential) compared against user clearance levels. While common in military systems, it does not dynamically evaluate environmental attributes like device health, location, or time."
+      }
+    ],
+    technicalRationale: "ABAC provides fine-grained, conditional access control based on policies that combine subject, object, action, and environmental attributes. It is the core access engine behind modern Zero Trust architectures.",
+    kenyanMetaphor: "RBAC is an M-Pesa agent badge that lets anyone in an M-Pesa uniform open the store safe at any time. ABAC is a smart biometric safe that checks: Is the person staff? (Subject) + Is it between 9:00 AM and 5:00 PM? (Time) + Is the shop's panic alarm disarmed? (Device) + Is the safe connected to the branch Wi-Fi? (Location). If the manager arrives at midnight, the safe stays locked!"
   }
 ];
+
