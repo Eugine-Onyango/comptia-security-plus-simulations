@@ -147,6 +147,7 @@ import Checkpoint2StudioSim from './components/simulations/Checkpoint2StudioSim'
 import Domain1PrepSetMcq from './components/questions/Domain1PrepSetMcq';
 import Domain2PrepSetMcq from './components/questions/Domain2PrepSetMcq';
 import Domain3PrepSetMcq from './components/questions/Domain3PrepSetMcq';
+import Domain4PrepSetMcq from './components/questions/Domain4PrepSetMcq';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'domain1', 'domain2', 'domain3', 'domain4', 'domain5', ...
@@ -185,6 +186,7 @@ export default function App() {
               if (domainId === 'prepset_domain1') setCurrentView('prepset_domain1');
               if (domainId === 'prepset_domain2') setCurrentView('prepset_domain2');
               if (domainId === 'prepset_domain3') setCurrentView('prepset_domain3');
+              if (domainId === 'prepset_domain4') setCurrentView('prepset_domain4');
             }}
           />
         )}
@@ -231,6 +233,10 @@ export default function App() {
 
         {currentView === 'prepset_domain3' && (
           <Domain3PrepSetMcq onBack={() => setCurrentView('home')} />
+        )}
+
+        {currentView === 'prepset_domain4' && (
+          <Domain4PrepSetMcq onBack={() => setCurrentView('home')} />
         )}
 
         {currentView === 'exam_bank' && (

@@ -671,6 +671,56 @@ export default function HomePage({ onSelectDomain }) {
               </span>
             </div>
           </div>
+
+          {/* FEATURED: PrepSet Domain 4.0 Exam Simulator (Operations and Incident Response) */}
+          <div 
+            onClick={() => handleSelect('prepset_domain4')}
+            class="group bg-gradient-to-br from-red-700 via-rose-800 to-slate-950 text-white rounded-3xl p-6 border-4 border-rose-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3"
+          >
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-rose-100 text-xs font-black backdrop-blur-md">
+                  <Sparkles class="w-4 h-4 text-rose-200 animate-bounce" />
+                  <span>Exam-Grade Scenario Simulator • Real-Time SOC & Incident Response</span>
+                </div>
+                <span class="px-3 py-1 bg-white text-rose-950 font-black text-xs rounded-full shadow-sm">
+                  PREPSET EXAM BANK: DOMAIN 4.0 🚨
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-3xl shrink-0 group-hover:scale-110 transition-transform">
+                  🚨🛡️
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-rose-200 transition-colors">
+                    PrepSet Advanced Exam Bank: Domain 4.0 (Operations & Incident Response) 🚨
+                  </h3>
+                  <p class="text-rose-100 text-sm font-medium mt-1">
+                    Master critical CompTIA SY0-701 scenarios across <strong>Secure Baselines & Hardening</strong>, <strong>Asset Management & Media Sanitization</strong>, <strong>Vulnerability Management & Pen Testing</strong>, <strong>SIEM/SOAR Monitoring & Alert Tuning</strong>, <strong>Firewalls & Web Filtering</strong>, <strong>IAM & MFA Protocols</strong>, and <strong>NIST SP 800-61 Incident Response & Forensics</strong>!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 4.1: Secure Baselines & Application Security</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 4.2 & 4.3: Asset Management & Threat Intelligence</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 4.4 & 4.5: Security Monitoring, Tools & Firewalls</span>
+                <span class="px-3 py-1 bg-white/15 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20">Section 4.6 - 4.8: IAM, Automation, Forensics & Logs</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-rose-400/40 flex items-center justify-between text-rose-100 font-black text-base">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-rose-200 group-hover:translate-x-1 transition-transform" />
+                <span>Launch PrepSet Domain 4.0 Exam Simulator →</span>
+              </span>
+              <span class="px-3 py-1 bg-white text-rose-950 rounded-full font-black text-xs">
+                Start Domain 4.0 🚨
+              </span>
+            </div>
+          </div>
+
           {/* Domain 1.0 Card */}
           <div
             onClick={() => handleSelect('domain1')}
