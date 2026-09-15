@@ -523,6 +523,61 @@ export default function HomePage({ onSelectDomain }) {
             </div>
           </div>
 
+          {/* FEATURED: CompTIA Full-Length 90-Question Mock Exam Hub */}
+          <div 
+            onClick={() => handleSelect('full_mock_exams')}
+            class="group bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-950 text-white rounded-3xl p-6 sm:p-8 border-4 border-amber-400 shadow-2xl hover:shadow-amber-500/20 hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-3 ring-4 ring-purple-500/30"
+          >
+            {/* Background Glow */}
+            <div class="absolute -right-16 -top-16 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div class="absolute -left-16 -bottom-16 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+
+            <div class="space-y-4 relative z-10">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-yellow-300 text-xs font-black backdrop-blur-md border border-yellow-300/30">
+                  <Sparkles class="w-4 h-4 text-yellow-300 animate-bounce" />
+                  <span>250 Questions Aggregated • Standard CompTIA 90-Q Exam Mode</span>
+                </div>
+                <span class="px-3.5 py-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 text-amber-950 font-black text-xs rounded-full shadow-lg flex items-center gap-1.5">
+                  <span>🏆 FLAGSHIP SIMULATOR</span>
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center font-black text-3xl sm:text-4xl shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-amber-400/30 text-slate-950">
+                  🎓⏱️
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-3xl font-black text-white group-hover:text-yellow-300 transition-colors">
+                    CompTIA Security+ Full-Length 90-Question Mock Exam Hub
+                  </h3>
+                  <p class="text-purple-200 text-sm font-medium mt-1 leading-relaxed">
+                    Experience the real test environment with 90-question simulations drawn across all 5 CompTIA domains! Choose between <strong>Mock 1 (90 Qs)</strong>, <strong>Mock 2 (90 Qs)</strong>, <strong>Mock 3 (70 Qs)</strong>, or generate <strong>Infinite Dynamic Random 90s</strong>. Features option shuffling (A, B, C, D), 90-min countdown timer, question navigator grid (1–90), flag for review, and Kenyan autopsies!
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20 text-purple-200">Mock Exam 1 (90 Qs • 18/Domain)</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20 text-purple-200">Mock Exam 2 (90 Qs • 18/Domain)</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20 text-purple-200">Mock Exam 3 (70 Qs • 14/Domain)</span>
+                <span class="px-3 py-1 bg-yellow-400/20 text-yellow-300 rounded-xl text-xs font-bold backdrop-blur-sm border border-yellow-400/30">Dynamic Random 90s</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20 text-purple-200">Fisher-Yates Option Shuffling</span>
+                <span class="px-3 py-1 bg-white/10 rounded-xl text-xs font-bold backdrop-blur-sm border border-white/20 text-purple-200">90-Minute Timer & Navigator Grid</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-purple-500/40 flex items-center justify-between text-yellow-300 font-black text-base relative z-10">
+              <span class="flex items-center gap-2">
+                <ChevronRight class="w-5 h-5 text-amber-400 group-hover:translate-x-1.5 transition-transform" />
+                <span>Launch Full 90-Question Mock Exam Hub →</span>
+              </span>
+              <span class="px-4 py-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 text-amber-950 rounded-full font-black text-xs shadow-md group-hover:scale-105 transition-transform">
+                Start Mock Exam 🎓
+              </span>
+            </div>
+          </div>
+
           {/* FEATURED: PrepSet Exam Simulator (Hard-Mode Scenario Practice) */}
           <div 
             onClick={() => handleSelect('prepset_domain1')}

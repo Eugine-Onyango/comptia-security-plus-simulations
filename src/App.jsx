@@ -149,6 +149,7 @@ import Domain2PrepSetMcq from './components/questions/Domain2PrepSetMcq';
 import Domain3PrepSetMcq from './components/questions/Domain3PrepSetMcq';
 import Domain4PrepSetMcq from './components/questions/Domain4PrepSetMcq';
 import Domain5PrepSetMcq from './components/questions/Domain5PrepSetMcq';
+import FullMockExamSimulator from './components/questions/FullMockExamSimulator';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'domain1', 'domain2', 'domain3', 'domain4', 'domain5', ...
@@ -189,8 +190,13 @@ export default function App() {
               if (domainId === 'prepset_domain3') setCurrentView('prepset_domain3');
               if (domainId === 'prepset_domain4') setCurrentView('prepset_domain4');
               if (domainId === 'prepset_domain5') setCurrentView('prepset_domain5');
+              if (domainId === 'full_mock_exams') setCurrentView('full_mock_exams');
             }}
           />
+        )}
+
+        {currentView === 'full_mock_exams' && (
+          <FullMockExamSimulator onBack={() => setCurrentView('home')} />
         )}
 
         {currentView === 'ports_sim' && (

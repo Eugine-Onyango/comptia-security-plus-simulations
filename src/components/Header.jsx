@@ -187,6 +187,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
           </button>
 
           <button
+            onClick={() => { sounds.playPop(); setCurrentView('full_mock_exams'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'full_mock_exams'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 border-purple-700 text-white shadow-purple-200 shadow-md scale-105'
+                : 'bg-gradient-to-r from-purple-100 to-indigo-100 hover:from-purple-200 hover:to-indigo-200 border-purple-400 text-purple-950 font-black'
+            }`}
+          >
+            <span>🎓 90-Q Mocks</span>
+          </button>
+
+          <button
             onClick={() => { sounds.playPop(); setCurrentView('command_drills'); }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
               currentView === 'command_drills'
