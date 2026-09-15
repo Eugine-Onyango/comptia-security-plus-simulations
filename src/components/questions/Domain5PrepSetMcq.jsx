@@ -8,6 +8,16 @@ import confetti from 'canvas-confetti';
 import { sounds } from '../../utils/audio';
 import { DOMAIN5_PREPSET_QUESTIONS } from '../../data/domain5PrepSetQuestions';
 
+// Helper to shuffle array (Fisher-Yates)
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export default function Domain5PrepSetMcq({ onBack }) {
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -18,8 +28,23 @@ export default function Domain5PrepSetMcq({ onBack }) {
   const [userAnswers, setUserAnswers] = useState([]);
   const [activeTab, setActiveTab] = useState('quiz'); // 'quiz' or 'review'
 
+  const initQuiz = () => {
+    const prepared = DOMAIN5_PREPSET_QUESTIONS.map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+    setQuestions(shuffleArray(prepared));
+    setCurrentIdx(0);
+    setSelectedOptionIdx(null);
+    setIsSubmitted(false);
+    setScore(0);
+    setShowResult(false);
+    setUserAnswers([]);
+    setActiveTab('quiz');
+  };
+
   useEffect(() => {
-    setQuestions(DOMAIN5_PREPSET_QUESTIONS);
+    initQuiz();
   }, []);
 
   if (questions.length === 0) return null;
@@ -81,13 +106,7 @@ export default function Domain5PrepSetMcq({ onBack }) {
 
   const handleRestart = () => {
     sounds.playPop();
-    setCurrentIdx(0);
-    setSelectedOptionIdx(null);
-    setIsSubmitted(false);
-    setScore(0);
-    setShowResult(false);
-    setUserAnswers([]);
-    setActiveTab('quiz');
+    initQuiz();
   };
 
   const scorePercentage = Math.round((score / questions.length) * 100);
