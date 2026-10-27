@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Lock, Eye, EyeOff } from 'lucide-react';
 
+// Set to true to require the password again before accessing the app.
+const PASSWORD_ENABLED = false;
 const ACCESS_PASSWORD = 'SeccurityPlus';
 const STORAGE_KEY = 'secplus_access_granted';
 
@@ -12,7 +14,7 @@ export default function PasswordGate({ children }) {
   const [error, setError] = useState('');
   const [show, setShow] = useState(false);
 
-  if (unlocked) return children;
+  if (!PASSWORD_ENABLED || unlocked) return children;
 
   const handleSubmit = (e) => {
     e.preventDefault();
