@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Award, CheckCircle2, XCircle, RotateCcw, Shuffle, HelpCircle, AlertCircle, ShieldCheck, FileCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import QuestionSpeakerButton from '../QuestionSpeakerButton';
 import { sounds } from '../../utils/audio';
 
 const rawQuestions = [
@@ -874,7 +875,10 @@ export default function Domain5DumpsBatch11Mcq({ onBack }) {
 
           {/* Question Scenario Text */}
           <div className="space-y-2">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-purple-600">CompTIA Exam Scenario</span>
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-purple-600">CompTIA Exam Scenario</span>
+              <QuestionSpeakerButton question={currentQ.question} options={currentQ.options} />
+            </div>
             <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-relaxed">
               {currentQ.question}
             </h3>
