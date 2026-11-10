@@ -150,10 +150,16 @@ import Domain3PrepSetMcq from './components/questions/Domain3PrepSetMcq';
 import Domain4PrepSetMcq from './components/questions/Domain4PrepSetMcq';
 import Domain5PrepSetMcq from './components/questions/Domain5PrepSetMcq';
 import FullMockExamSimulator from './components/questions/FullMockExamSimulator';
+import CcnaSmartCityHub from './components/ccna/CcnaSmartCityHub';
+import LinuxCozyHouseHub from './components/linux/LinuxCozyHouseHub';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'domain1', 'domain2', 'domain3', 'domain4', 'domain5', ...
+  const [currentView, setCurrentView] = useState('linux_hub'); // Standalone Linux Cozy House by default
   const [soundEnabled, setSoundEnabled] = useState(true);
+
+  if (currentView === 'linux_hub') {
+    return <LinuxCozyHouseHub />;
+  }
 
   return (
     <div class="min-h-screen flex flex-col bg-amber-50/40 text-slate-800">
@@ -168,9 +174,15 @@ export default function App() {
 
       {/* Main View Switcher */}
       <main class="flex-1 pb-16">
+        {currentView === 'ccna_hub' && (
+          <CcnaSmartCityHub onBack={() => setCurrentView('home')} />
+        )}
+
         {currentView === 'home' && (
           <HomePage
             onSelectDomain={(domainId) => {
+              if (domainId === 'linux_hub') setCurrentView('linux_hub');
+              if (domainId === 'ccna_hub') setCurrentView('ccna_hub');
               if (domainId === 'domain1') setCurrentView('domain1');
               if (domainId === 'domain2') setCurrentView('domain2');
               if (domainId === 'domain3') setCurrentView('domain3');

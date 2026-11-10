@@ -55,6 +55,17 @@ export default function Header({ currentView, setCurrentView, soundEnabled, setS
         {/* Navigation Ribbon: Horizontally swipeable on mobile, wraps nicely on tablet/desktop */}
         <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-3 px-3 sm:mx-0 sm:px-0">
           <button
+            onClick={() => { sounds.playPop(); setCurrentView('ccna_hub'); }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
+              currentView === 'ccna_hub'
+                ? 'bg-emerald-600 border-emerald-700 text-white shadow-emerald-200 scale-105'
+                : 'bg-emerald-100 hover:bg-emerald-200 border-emerald-400 text-emerald-950 font-black'
+            }`}
+          >
+            <span>🏙️🇰🇪 CCNA Smart-City</span>
+          </button>
+
+          <button
             onClick={() => { sounds.playPop(); setCurrentView('ports_sim'); }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full font-extrabold text-xs sm:text-sm transition-all shadow-sm active:scale-95 border-2 whitespace-nowrap shrink-0 ${
               currentView === 'ports_sim'
