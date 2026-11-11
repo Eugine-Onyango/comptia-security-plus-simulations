@@ -46,7 +46,7 @@ import { linuxTopic17Subtopics } from './linuxTopic17Data';
 import { sounds } from '../../utils/audio';
 import { stopSpeech } from '../../utils/speech';
 
-export default function LinuxCozyHouseHub() {
+export default function LinuxCozyHouseHub({ onSwitchView }) {
   // Top-level view: 'topic1' ... 'topic14' | 'roadmap'
   // Default to 'topic14' so the user immediately sees Topic 14: System Monitoring!
   const [mainTab, setMainTab] = useState('topic17');
@@ -1157,6 +1157,21 @@ export default function LinuxCozyHouseHub() {
                 <VolumeX className="w-4 h-4 text-slate-500" />
               )}
             </button>
+
+            {/* Switch to Splunk Guard Hub */}
+            {onSwitchView && (
+              <button
+                onClick={() => {
+                  stopSpeech();
+                  onSwitchView('splunk_hub');
+                }}
+                title="Switch to Splunk Super Guard Hub"
+                className="px-3 py-1.5 sm:py-2 rounded-2xl font-bold text-xs border border-amber-500/40 bg-[#131b2e] hover:bg-[#1a253e] text-amber-300 transition-all flex items-center gap-1.5 shadow-sm"
+              >
+                <span>🛡️</span>
+                <span className="hidden sm:inline">Splunk Guard</span>
+              </button>
+            )}
           </div>
         </div>
       </header>

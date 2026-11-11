@@ -152,13 +152,18 @@ import Domain5PrepSetMcq from './components/questions/Domain5PrepSetMcq';
 import FullMockExamSimulator from './components/questions/FullMockExamSimulator';
 import CcnaSmartCityHub from './components/ccna/CcnaSmartCityHub';
 import LinuxCozyHouseHub from './components/linux/LinuxCozyHouseHub';
+import SplunkGuardHub from './components/splunk/SplunkGuardHub';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState('linux_hub'); // Standalone Linux Cozy House by default
+  const [currentView, setCurrentView] = useState('splunk_hub'); // Standalone Splunk Guard Hub by default
   const [soundEnabled, setSoundEnabled] = useState(true);
 
+  if (currentView === 'splunk_hub') {
+    return <SplunkGuardHub onSwitchView={(view) => setCurrentView(view)} />;
+  }
+
   if (currentView === 'linux_hub') {
-    return <LinuxCozyHouseHub />;
+    return <LinuxCozyHouseHub onSwitchView={(view) => setCurrentView(view)} />;
   }
 
   return (
